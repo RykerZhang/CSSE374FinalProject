@@ -14,5 +14,6 @@ public class gameFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+        theGamePanel.startThread();
     }
 }
