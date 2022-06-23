@@ -1,31 +1,32 @@
-import ObserversAndSubjects.PlayerObserver;
+package Main;
+
+import Background.backgroundHandler;
+import Player.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Time;
 
-public class gamePanel extends JPanel implements Runnable, PlayerObserver {
-    int currentSize = 48;
-    int screenColumn = 16;
-    int screenRow = 9;
-    int screenWidth = screenColumn * currentSize;
-    int screenHeight = screenRow * currentSize;
-    int PlayerX = 100;
-    int PlayerY = 100;
+public class gamePanel extends JPanel implements Runnable{
+    public int currentSize = 30;
+    public int screenColumn = 24;
+    public int screenRow = 16;
+    public int screenWidth = screenColumn * currentSize;
+    public int screenHeight = screenRow * currentSize;
     private keyControl kc = new keyControl();
     private Thread thread;
     private int FPS = 60;
     Player player1 = new Player( kc, this);
+    backgroundHandler bgHandler = new backgroundHandler(this);
 
 
     public gamePanel(){
         super();
+
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(kc);
         this.setFocusable(true);
-        player1.registerObserver(this);
     }
 
     public void startThread(){
@@ -63,17 +64,13 @@ public class gamePanel extends JPanel implements Runnable, PlayerObserver {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(this.PlayerX,this.PlayerY,currentSize,currentSize);
+        bgHandler.draw(g2d);
+        player1.draw(g2d);
         g2d.dispose();
     }
 
     public void update(){
-        player1.updatePlayerPosition();
+        player1.update();
     }
 
-    @Override
-    public void updatePlayerPosition(int x, int y) {
-        this.PlayerX = x;
-        this.PlayerY = y;
-    }
 }
