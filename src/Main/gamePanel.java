@@ -5,6 +5,7 @@ import Player.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.security.PublicKey;
 
 public class gamePanel extends JPanel implements Runnable{
     public int currentSize = 30;
@@ -15,7 +16,11 @@ public class gamePanel extends JPanel implements Runnable{
     private keyControl kc = new keyControl();
     private Thread thread;
     private int FPS = 60;
-    Player player1 = new Player( kc, this);
+    public int BIGCOL = 72;
+    public int BIGROW = 48;
+    public int BIGWIDTH = currentSize*BIGCOL;
+    public int BIGHEIGHT = currentSize*BIGROW;
+    public Player player1 = new Player( kc, this);
     backgroundHandler bgHandler = new backgroundHandler(this);
 
 

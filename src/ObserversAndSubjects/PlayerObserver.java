@@ -3,5 +3,5 @@ package ObserversAndSubjects;
 import java.awt.image.BufferedImage;
 
 public interface PlayerObserver {
-    public void updatePlayerPosition(int PlayerX, int PlayerY, BufferedImage PlayerImage);
+    public void updatePlayerPosition(int BIGX, int BIGY, BufferedImage PlayerImagek, int PlayerX, int PlayerY );
 }

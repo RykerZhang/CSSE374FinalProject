@@ -14,7 +14,7 @@ public class backgroundHandler {
     public backgroundHandler(gamePanel gp){
         this.gp = gp;
         this.backgrounds = new background[5];
-        this.Map = new int[gp.screenRow][gp.screenColumn];
+        this.Map = new int[gp.BIGCOL][gp.BIGROW];
         this.getBackgroundImage();
         this.readMap();
     }
@@ -30,6 +30,9 @@ public class backgroundHandler {
             //image 2 is waterland
             backgrounds[2] = new background();
             backgrounds[2].image = ImageIO.read(new FileInputStream("./src/Pictures/Background/water1.png"));
+            //iamge 3 is wall
+            backgrounds[3] = new background();
+            backgrounds[3].image = ImageIO.read(new FileInputStream("./src/Pictures/Background/wall1.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,24 +40,24 @@ public class backgroundHandler {
 
     public void readMap(){
         try {
-            File file = new File("./src/Maps/HomeMap.txt");
+            File file = new File("./src/Maps/World.txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
             int column = 0;
             int row = 0;
-            while(column<gp.screenColumn && row<gp.screenRow){
+            while(column<gp.BIGCOL && row<gp.BIGROW){
                 String currentLine = br.readLine();
-                //System.out.println("Current line is " + column + "  " + row + " "+ currentLine);
-                String[] splitedCurrentLine = currentLine.split(" ");
-                for (int i = column;i<gp.screenColumn;i++){
-                    int backgroundNumber = Integer.parseInt(splitedCurrentLine[i]);
-                    Map[row][column] = backgroundNumber;
+               // System.out.println("Current line is " + column + "  " + row + " "+ currentLine);
+                while (column<gp.BIGCOL){
+                    String[] splitedCurrentLine = currentLine.split(" ");
+                    int number = Integer.parseInt(splitedCurrentLine[column]);
+                    Map[column][row] = number;
                     column++;
+
                 }
-                if(column == gp.screenColumn){
+                if(column == gp.BIGCOL){
                     column = 0;
                     row++;
                 }
-
             }
             br.close();
         } catch (FileNotFoundException e) {
@@ -65,18 +68,23 @@ public class backgroundHandler {
     }
     public void draw(Graphics2D g2d){
         //g2d.drawImage(backgrounds[0].image, 100,100, 300,300,null);
-        int column = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
-        for(int i = 0; i<gp.screenRow;i++){
-            x=0;
-            for(int j = 0;j<gp.screenColumn;j++){
-                int number = Map[i][j];
-                g2d.drawImage(backgrounds[number].image, x, y, gp.currentSize, gp.currentSize, null);
-                x+=30;
+        int bigcolumn = 0;
+        int bigrow = 0;
+
+        while(bigcolumn<gp.BIGCOL&&bigrow<gp.BIGROW){
+            //System.out.println(bigcolumn + " "+ bigrow);
+                int number = Map[bigcolumn][bigrow];
+                int bigx = bigcolumn * gp.currentSize;
+                int bigy = bigrow * gp.currentSize;
+                int screenx = bigx - gp.player1.getBIGX()+gp.player1.getX();
+                int screeny = bigy - gp.player1.getBIGY()+gp.player1.getY();
+                //System.out.println(screenx + " " + screeny);
+                g2d.drawImage(backgrounds[number].image, screenx, screeny, gp.currentSize, gp.currentSize, null);
+                bigcolumn++;
+            if(bigcolumn == gp.BIGCOL){
+                bigcolumn = 0;
+                bigrow++;
             }
-            y+=30;
         }
     }
 }

@@ -1,5 +1,6 @@
 package Player;
 
+import Main.gamePanel;
 import Main.keyControl;
 import ObserversAndSubjects.PlayerObserver;
 import ObserversAndSubjects.PlayerSubject;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 public class PlayerMove implements PlayerSubject {
     private int x;
     private int y;
+    private int BIGX;
+    private int BIGY;
     private int speed;
     private int MoveImageCount = 0;
     private int imageChoose = 1;
@@ -20,12 +23,14 @@ public class PlayerMove implements PlayerSubject {
     private BufferedImage PlayerImage;
     private BufferedImage playerFront1, playerFront2, playerBack1, playerBack2, playerLeft1, playerLeft2, playerRight1, playerRight2;
 
-    public PlayerMove(keyControl kc){
+    public PlayerMove(keyControl kc, gamePanel gp){
         this.setMoveImage();
         this.PlayerImage = this.getDefaultImage();
         playerObservers = new ArrayList<>();
-        this.x = 100;
-        this.y = 100;
+        this.x = gp.screenWidth/2-gp.currentSize;
+        this.y = gp.screenHeight/2-gp.currentSize;
+        this.BIGX = gp.currentSize*48/2 - gp.currentSize;
+        this.BIGY = gp.currentSize*32/2 - gp.currentSize;
         this.speed = 4;
         this.kc = kc;
     }
@@ -37,7 +42,7 @@ public class PlayerMove implements PlayerSubject {
             }else{
                 this.PlayerImage = playerRight2;
             }
-            x += speed;
+            BIGX += speed;
         }
         if(kc.isPressUp){
             if(imageChoose == 1){
@@ -45,21 +50,21 @@ public class PlayerMove implements PlayerSubject {
             }else{
                 this.PlayerImage = playerBack2;
             }
-            y -= speed;
+            BIGY -= speed;
         }
         if(kc.isPressDown){
             if(imageChoose == 1){
                 this.PlayerImage = playerFront1;
             }else{
                 this.PlayerImage = playerFront2;
-            }            y += speed;
+            }            BIGY += speed;
         }
         if(kc.isPressLeft) {
             if(imageChoose == 1){
                 this.PlayerImage = playerLeft1;
             }else{
                 this.PlayerImage = playerLeft2;
-            }            x -= speed;
+            }            BIGX -= speed;
         }
         this.notifyObservers();
     }
@@ -108,7 +113,7 @@ public class PlayerMove implements PlayerSubject {
     @Override
     public void notifyObservers() {
         for (PlayerObserver o: playerObservers){
-            o.updatePlayerPosition(this.x, this.y, this.PlayerImage);
+            o.updatePlayerPosition(this.BIGX, this.BIGY, this.PlayerImage, this.x, this.y);
         }
     }
 
