@@ -1,11 +1,11 @@
 package Main;
 
 import Background.backgroundHandler;
-import Player.Player;
-
+import gameObjects.gameObject;
+import gameObjects.gameObjectFactory;
+import gameObjects.PlayerFactory;
 import javax.swing.*;
 import java.awt.*;
-import java.security.PublicKey;
 
 public class gamePanel extends JPanel implements Runnable{
     public int currentSize = 30;
@@ -20,13 +20,16 @@ public class gamePanel extends JPanel implements Runnable{
     public int BIGROW = 48;
     public int BIGWIDTH = currentSize*BIGCOL;
     public int BIGHEIGHT = currentSize*BIGROW;
-    public Player player1 = new Player( kc, this);
-    backgroundHandler bgHandler = new backgroundHandler(this);
+    //player
+    public gameObjectFactory PlayerFactory1 = new PlayerFactory(kc, this);
+    public gameObject player1 =PlayerFactory1.createObject();
+    public backgroundHandler bgHandler = new backgroundHandler(this);
+    //collisionchecker
+    public collideChecker cc = new collideChecker(this);
 
 
     public gamePanel(){
         super();
-
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);

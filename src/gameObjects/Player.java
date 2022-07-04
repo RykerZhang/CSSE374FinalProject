@@ -1,4 +1,4 @@
-package Player;
+package gameObjects;
 
 import Main.gamePanel;
 import Main.keyControl;
@@ -6,7 +6,9 @@ import ObserversAndSubjects.PlayerObserver;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Player implements PlayerObserver{
+public class Player extends gameObject implements PlayerObserver {
+    private boolean isPlayer;
+    private String Name;
     private int x;
     private int y;
     private int BIGX;
@@ -15,20 +17,27 @@ public class Player implements PlayerObserver{
     private gamePanel gp;
     private BufferedImage PlayerImgae;
     PlayerMove playerMove;
+
     public Player(keyControl kc, gamePanel gp){
+        this.isPlayer = false;
         this.x = 100;
         this.y = 100;
         //this.BIGX = 100;
        // this.BIGY = 100;
         this.kc = kc;
         this.gp = gp;
+
         playerMove = new PlayerMove(kc, gp);
         playerMove.registerObserver(this);
     }
 
     public void update(){
+
         playerMove.updatePlayerPosition();
+
     }
+
+
     public void draw(Graphics2D g2d){
        // System.out.println(this.x);
         g2d.drawImage(this.PlayerImgae, this.x, this.y, gp.currentSize,gp.currentSize,null);
@@ -43,6 +52,13 @@ public class Player implements PlayerObserver{
         this.PlayerImgae = PlayerImage;
     }
 
+    public void setName(String name){
+        this.Name = name;
+    }
+
+    public String getName(){
+        return this.Name;
+    }
     public int getX() {
         return x;
     }
@@ -58,4 +74,6 @@ public class Player implements PlayerObserver{
     public int getBIGY() {
         return BIGY;
     }
+
+
 }

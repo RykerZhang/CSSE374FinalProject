@@ -1,10 +1,11 @@
-package Player;
+package gameObjects;
 
 import Main.gamePanel;
 import Main.keyControl;
 import ObserversAndSubjects.PlayerObserver;
 import ObserversAndSubjects.PlayerSubject;
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,11 +20,18 @@ public class PlayerMove implements PlayerSubject {
     private int MoveImageCount = 0;
     private int imageChoose = 1;
     private keyControl kc;
+    private gamePanel gp;
     private ArrayList<PlayerObserver> playerObservers;
     private BufferedImage PlayerImage;
     private BufferedImage playerFront1, playerFront2, playerBack1, playerBack2, playerLeft1, playerLeft2, playerRight1, playerRight2;
+    private boolean doUpCollide;
+    private boolean doLeftCollide;
+    private boolean doRightCollide;
+    private boolean doDownCollide;
+
 
     public PlayerMove(keyControl kc, gamePanel gp){
+        this.gp = gp;
         this.setMoveImage();
         this.PlayerImage = this.getDefaultImage();
         playerObservers = new ArrayList<>();
@@ -33,8 +41,10 @@ public class PlayerMove implements PlayerSubject {
         this.BIGY = gp.currentSize*32/2 - gp.currentSize;
         this.speed = 4;
         this.kc = kc;
+
     }
     public void updatePlayerPosition(){
+        this.checkCollision();
         this.switchSameDirectionImage();
         if(kc.isPressRight){
             if(imageChoose == 1){
@@ -42,7 +52,8 @@ public class PlayerMove implements PlayerSubject {
             }else{
                 this.PlayerImage = playerRight2;
             }
-            BIGX += speed;
+                BIGX += speed;
+
         }
         if(kc.isPressUp){
             if(imageChoose == 1){
@@ -50,14 +61,18 @@ public class PlayerMove implements PlayerSubject {
             }else{
                 this.PlayerImage = playerBack2;
             }
-            BIGY -= speed;
+            if(this.doUpCollide == false) {
+                BIGY -= speed;
+            }
         }
         if(kc.isPressDown){
             if(imageChoose == 1){
                 this.PlayerImage = playerFront1;
             }else{
                 this.PlayerImage = playerFront2;
-            }            BIGY += speed;
+            }
+
+            BIGY += speed;
         }
         if(kc.isPressLeft) {
             if(imageChoose == 1){
@@ -66,7 +81,16 @@ public class PlayerMove implements PlayerSubject {
                 this.PlayerImage = playerLeft2;
             }            BIGX -= speed;
         }
+
         this.notifyObservers();
+    }
+
+    public void checkCollision(){
+        this.doUpCollide = false;
+        this.doDownCollide = false;
+        this.doLeftCollide = false;
+        this.doRightCollide = false;
+        this.gp.cc.checkUpCollision(this);
     }
 
     public void setMoveImage(){
@@ -117,4 +141,56 @@ public class PlayerMove implements PlayerSubject {
         }
     }
 
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getBIGX() {
+        return BIGX;
+    }
+
+    public int getBIGY() {
+        return BIGY;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public boolean isDoUpCollide() {
+        return doUpCollide;
+    }
+
+    public void setDoUpCollide(boolean doUpCollide) {
+        this.doUpCollide = doUpCollide;
+    }
+
+    public boolean isDoLeftCollide() {
+        return doLeftCollide;
+    }
+
+    public void setDoLeftCollide(boolean doLeftCollide) {
+        this.doLeftCollide = doLeftCollide;
+    }
+
+    public boolean isDoRightCollide() {
+        return doRightCollide;
+    }
+
+    public void setDoRightCollide(boolean doRightCollide) {
+        this.doRightCollide = doRightCollide;
+    }
+
+    public boolean isDoDownCollide() {
+        return doDownCollide;
+    }
+
+    public void setDoDownCollide(boolean doDownCollide) {
+        this.doDownCollide = doDownCollide;
+    }
 }
