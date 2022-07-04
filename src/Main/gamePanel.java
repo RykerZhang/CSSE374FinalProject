@@ -1,6 +1,7 @@
 package Main;
 
 import Background.backgroundHandler;
+import gameObjects.InteractableObjects.Placement;
 import gameObjects.gameObject;
 import gameObjects.gameObjectFactory;
 import gameObjects.PlayerFactory;
@@ -26,7 +27,8 @@ public class gamePanel extends JPanel implements Runnable{
     public backgroundHandler bgHandler = new backgroundHandler(this);
     //collisionchecker
     public collideChecker cc = new collideChecker(this);
-
+    //Placement
+    public Placement placement = Placement.getInstance(this);
 
     public gamePanel(){
         super();
@@ -74,6 +76,8 @@ public class gamePanel extends JPanel implements Runnable{
         g2d.setColor(Color.WHITE);
         bgHandler.draw(g2d);
         player1.draw(g2d);
+        placement.placeObjects(g2d);
+
         g2d.dispose();
     }
 

@@ -23,7 +23,7 @@ public class Chest extends gameObject {
         this.BIGX = x;
         this.BIGY = y;
         try {
-            this.image = ImageIO.read(new FileInputStream("./src/Pictures/Player/playerfront1.png"));
+            this.image = ImageIO.read(new FileInputStream("./src/Pictures/InteractableObjects/chest1.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,6 +55,8 @@ public class Chest extends gameObject {
 
     @Override
     public void draw(Graphics2D g2d) {
-
+        double screenx = this.BIGX - gp.player1.getBIGX()+gp.player1.getX();
+        double screeny = this.BIGY - gp.player1.getBIGY()+gp.player1.getY();
+        g2d.drawImage(this.image, (int)screenx, (int)screeny, gp.currentSize, gp.currentSize, null);
     }
 }
