@@ -19,11 +19,8 @@ public class Wall extends background{
         }
         this.collide = true;
     }
-
     @Override
-    public BufferedImage getImage() {
-        return image;
-    }
+    public BufferedImage getImage() {return image;}
     @Override
     public String getName() {
         return name;

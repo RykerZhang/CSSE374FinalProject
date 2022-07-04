@@ -6,6 +6,7 @@ public class background {
    public String name;
    public BufferedImage image;
    public boolean collide = false;
+   public double SpeedPercentage = 1;
 
    public BufferedImage getImage() {
       return image;
@@ -18,4 +19,9 @@ public class background {
    public boolean isCollide() {
       return collide;
    }
+
+   public double getSpeedPercentage() {
+      return SpeedPercentage;
+   }
+
 }

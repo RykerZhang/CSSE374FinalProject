@@ -12,11 +12,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class PlayerMove implements PlayerSubject {
-    private int x;
-    private int y;
-    private int BIGX;
-    private int BIGY;
-    private int speed;
+    private double x;
+    private double y;
+    private double BIGX;
+    private double BIGY;
+    private double speed;
     private int MoveImageCount = 0;
     private int imageChoose = 1;
     private keyControl kc;
@@ -101,7 +101,7 @@ public class PlayerMove implements PlayerSubject {
         this.gp.cc.checkLeftCollision(this);
         this.gp.cc.checkDownCollision(this);
         this.gp.cc.checkRightCollision(this);
-
+        this.gp.cc.checkSpeed(this);
     }
 
     public void setMoveImage(){
@@ -148,28 +148,28 @@ public class PlayerMove implements PlayerSubject {
     @Override
     public void notifyObservers() {
         for (PlayerObserver o: playerObservers){
-            o.updatePlayerPosition(this.BIGX, this.BIGY, this.PlayerImage, this.x, this.y);
+            o.updatePlayerPosition((int)this.BIGX, (int)this.BIGY, this.PlayerImage,(int) this.x, (int)this.y);
         }
     }
 
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public int getBIGX() {
+    public double getBIGX() {
         return BIGX;
     }
 
-    public int getBIGY() {
+    public double getBIGY() {
         return BIGY;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
@@ -207,5 +207,9 @@ public class PlayerMove implements PlayerSubject {
 
     public Rectangle getCollideArea() {
         return collideArea;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 }

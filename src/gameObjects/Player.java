@@ -9,10 +9,10 @@ import java.awt.image.BufferedImage;
 public class Player extends gameObject implements PlayerObserver {
     private boolean isPlayer;
     private String Name;
-    private int x;
-    private int y;
-    private int BIGX;
-    private int BIGY;
+    private double x;
+    private double y;
+    private double BIGX;
+    private double BIGY;
     private keyControl kc;
     private gamePanel gp;
     private BufferedImage PlayerImgae;
@@ -40,7 +40,7 @@ public class Player extends gameObject implements PlayerObserver {
 
     public void draw(Graphics2D g2d){
        // System.out.println(this.x);
-        g2d.drawImage(this.PlayerImgae, this.x, this.y, gp.currentSize,gp.currentSize,null);
+        g2d.drawImage(this.PlayerImgae, (int)this.x, (int)this.y, (int)gp.currentSize,(int)gp.currentSize,null);
     }
 
     @Override
@@ -59,19 +59,19 @@ public class Player extends gameObject implements PlayerObserver {
     public String getName(){
         return this.Name;
     }
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public int getBIGX() {
+    public double getBIGX() {
         return BIGX;
     }
 
-    public int getBIGY() {
+    public double getBIGY() {
         return BIGY;
     }
 

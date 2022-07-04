@@ -9,17 +9,17 @@ import java.awt.*;
 
 public class gamePanel extends JPanel implements Runnable{
     public int currentSize = 30;
-    public int screenColumn = 24;
+    public double screenColumn = 24;
     public int screenRow = 16;
-    public int screenWidth = screenColumn * currentSize;
-    public int screenHeight = screenRow * currentSize;
+    public double screenWidth = screenColumn * currentSize;
+    public double screenHeight = screenRow * currentSize;
     private keyControl kc = new keyControl();
     private Thread thread;
     private int FPS = 60;
     public int BIGCOL = 72;
     public int BIGROW = 48;
-    public int BIGWIDTH = currentSize*BIGCOL;
-    public int BIGHEIGHT = currentSize*BIGROW;
+    public double BIGWIDTH = currentSize*BIGCOL;
+    public double BIGHEIGHT = currentSize*BIGROW;
     //player
     public gameObjectFactory PlayerFactory1 = new PlayerFactory(kc, this);
     public gameObject player1 =PlayerFactory1.createObject();
@@ -30,7 +30,7 @@ public class gamePanel extends JPanel implements Runnable{
 
     public gamePanel(){
         super();
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setPreferredSize(new Dimension((int)screenWidth, (int)screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(kc);

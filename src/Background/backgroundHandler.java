@@ -1,8 +1,6 @@
 package Background;
 
 import Main.gamePanel;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 
@@ -21,7 +19,9 @@ public class backgroundHandler {
 
     public void setBackgrounds(){
         this.backgrounds[0] = new Land();
+        this.backgrounds[0] = new SlowDown(this.backgrounds[0], 1.0);
         this.backgrounds[1] = new GrassLand();
+        this.backgrounds[1] = new SlowDown(this.backgrounds[1], 0.7);
         this.backgrounds[2] = new WaterLand();
         this.backgrounds[3] = new Wall();
     }
@@ -61,11 +61,11 @@ public class backgroundHandler {
 
         while(bigcolumn<gp.BIGCOL&&bigrow<gp.BIGROW){
                 int number = gameMap[bigcolumn][bigrow];
-                int bigx = bigcolumn * gp.currentSize;
-                int bigy = bigrow * gp.currentSize;
-                int screenx = bigx - gp.player1.getBIGX()+gp.player1.getX();
-                int screeny = bigy - gp.player1.getBIGY()+gp.player1.getY();
-                g2d.drawImage(backgrounds[number].getImage(), screenx, screeny, gp.currentSize, gp.currentSize, null);
+                double bigx = bigcolumn * gp.currentSize;
+                double bigy = bigrow * gp.currentSize;
+                double screenx = bigx - gp.player1.getBIGX()+gp.player1.getX();
+                double screeny = bigy - gp.player1.getBIGY()+gp.player1.getY();
+                g2d.drawImage(backgrounds[number].getImage(), (int)screenx, (int)screeny, gp.currentSize, gp.currentSize, null);
                 bigcolumn++;
             if(bigcolumn == gp.BIGCOL){
                 bigcolumn = 0;

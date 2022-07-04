@@ -9,6 +9,7 @@ public class Land extends background{
     private String name;
     private BufferedImage image;
     private boolean collide = false;
+    public double SpeedPercentage = 1;
 
     public Land(){
         this.name = "Land";
@@ -31,5 +32,9 @@ public class Land extends background{
     @Override
     public boolean isCollide() {
         return collide;
+    }
+    @Override
+    public double getSpeedPercentage() {
+        return SpeedPercentage;
     }
 }
