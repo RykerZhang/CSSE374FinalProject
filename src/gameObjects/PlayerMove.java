@@ -42,7 +42,7 @@ public class PlayerMove implements PlayerSubject {
         this.BIGY = gp.currentSize*32/2 - gp.currentSize;
         this.speed = 4;
         this.kc = kc;
-        this.collideArea = new Rectangle(5,5, 20, 20);
+        this.collideArea = new Rectangle(2,2, 26, 26);
 
     }
     public void updatePlayerPosition(){
