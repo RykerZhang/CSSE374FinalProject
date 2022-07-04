@@ -24,6 +24,7 @@ public class PlayerMove implements PlayerSubject {
     private ArrayList<PlayerObserver> playerObservers;
     private BufferedImage PlayerImage;
     private BufferedImage playerFront1, playerFront2, playerBack1, playerBack2, playerLeft1, playerLeft2, playerRight1, playerRight2;
+    private Rectangle collideArea;
     private boolean doUpCollide;
     private boolean doLeftCollide;
     private boolean doRightCollide;
@@ -41,6 +42,7 @@ public class PlayerMove implements PlayerSubject {
         this.BIGY = gp.currentSize*32/2 - gp.currentSize;
         this.speed = 4;
         this.kc = kc;
+        this.collideArea = new Rectangle(5,5, 20, 20);
 
     }
     public void updatePlayerPosition(){
@@ -52,8 +54,9 @@ public class PlayerMove implements PlayerSubject {
             }else{
                 this.PlayerImage = playerRight2;
             }
+            if(this.doRightCollide == false) {
                 BIGX += speed;
-
+            }
         }
         if(kc.isPressUp){
             if(imageChoose == 1){
@@ -71,15 +74,19 @@ public class PlayerMove implements PlayerSubject {
             }else{
                 this.PlayerImage = playerFront2;
             }
-
-            BIGY += speed;
+            if(this.doDownCollide == false) {
+                BIGY += speed;
+            }
         }
         if(kc.isPressLeft) {
             if(imageChoose == 1){
                 this.PlayerImage = playerLeft1;
             }else{
                 this.PlayerImage = playerLeft2;
-            }            BIGX -= speed;
+            }
+            if(this.doLeftCollide == false) {
+                BIGX -= speed;
+            }
         }
 
         this.notifyObservers();
@@ -91,6 +98,10 @@ public class PlayerMove implements PlayerSubject {
         this.doLeftCollide = false;
         this.doRightCollide = false;
         this.gp.cc.checkUpCollision(this);
+        this.gp.cc.checkLeftCollision(this);
+        this.gp.cc.checkDownCollision(this);
+        this.gp.cc.checkRightCollision(this);
+
     }
 
     public void setMoveImage(){
@@ -192,5 +203,9 @@ public class PlayerMove implements PlayerSubject {
 
     public void setDoDownCollide(boolean doDownCollide) {
         this.doDownCollide = doDownCollide;
+    }
+
+    public Rectangle getCollideArea() {
+        return collideArea;
     }
 }

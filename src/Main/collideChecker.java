@@ -10,6 +10,10 @@ public class collideChecker {
     public int objectRightColumn;
     public int objectUpRow;
     public int objectDownRow;
+    public int objectLeftBigX;
+    public int objectUpBigY;
+    public int objectDownBigY;
+    public int objectRightBigX;
     public int gameMap[][];
     public background[] backgrounds ;
     public collideChecker(gamePanel gp){
@@ -20,7 +24,6 @@ public class collideChecker {
 
     public background readTerrainNumber(int col, int row){
         int terrainNumber = gameMap[col][row];
-       // System.out.println(terrainNumber);
         return backgrounds[terrainNumber];
     }
 
@@ -32,22 +35,65 @@ public class collideChecker {
     }
 
     public void getColAndRow(PlayerMove pm){
-        objectLeftColumn = pm.getBIGX() / gp.currentSize;
-        objectRightColumn = (pm.getBIGX()+30) / gp.currentSize;
-        objectUpRow = pm.getBIGY()/ gp.currentSize;
-        objectDownRow = (pm.getBIGY() + 30) / gp.currentSize;
+        objectUpBigY = pm.getBIGY()+ pm.getCollideArea().y;
+        objectLeftBigX = pm.getBIGX() + pm.getCollideArea().x;
+        objectRightBigX = objectLeftBigX + pm.getCollideArea().width;
+        objectDownBigY = objectUpBigY + pm.getCollideArea().height;
+        objectLeftColumn = objectLeftBigX / gp.currentSize;
+        objectRightColumn = objectRightBigX / gp.currentSize;
+        objectUpRow = objectUpBigY/ gp.currentSize;
+        objectDownRow =objectDownBigY / gp.currentSize;
     }
 
     public void checkUpCollision(PlayerMove pm){
         this.getColAndRow(pm);
-        int estimatedY = pm.getBIGY() - pm.getSpeed();
+        int estimatedY = objectUpBigY - pm.getSpeed();
         int estiamtedUpRow = estimatedY / gp.currentSize;
         background b1 =  this.readTerrainNumber(objectLeftColumn, estiamtedUpRow);
-        background b2 = this.readTerrainNumber(objectRightColumn, objectDownRow);
+        background b2 = this.readTerrainNumber(objectRightColumn, estiamtedUpRow);
         if(b1.isCollide() == true||b2.isCollide() == true){
             pm.setDoUpCollide(true);
         }else{
             pm.setDoUpCollide(false);
+        }
+    }
+
+    public void checkLeftCollision(PlayerMove pm){
+        this.getColAndRow(pm);
+        int estimatedX = objectLeftBigX- pm.getSpeed();
+        int estiamtedLeftColumn = estimatedX / gp.currentSize;
+        background b1 =  this.readTerrainNumber(estiamtedLeftColumn, objectUpRow);
+        background b2 = this.readTerrainNumber(estiamtedLeftColumn, objectDownRow);
+        if(b1.isCollide() == true||b2.isCollide() == true){
+            pm.setDoLeftCollide(true);
+        }else{
+            pm.setDoLeftCollide(false);
+        }
+    }
+
+    public void checkDownCollision(PlayerMove pm){
+        this.getColAndRow(pm);
+        int estimatedY = objectDownBigY + pm.getSpeed();
+        int estiamtedDownRow =estimatedY/ gp.currentSize;
+        background b1 =  this.readTerrainNumber(objectLeftColumn, estiamtedDownRow);
+        background b2 = this.readTerrainNumber(objectRightColumn, estiamtedDownRow);
+        if(b1.isCollide() == true||b2.isCollide() == true){
+            pm.setDoDownCollide(true);
+        }else{
+            pm.setDoDownCollide(false);
+        }
+    }
+
+    public void checkRightCollision(PlayerMove pm){
+        this.getColAndRow(pm);
+        int estimatedX = objectRightBigX + pm.getSpeed();
+        int estiamtedRightColumn = estimatedX / gp.currentSize;
+        background b1 =  this.readTerrainNumber(estiamtedRightColumn, objectUpRow);
+        background b2 = this.readTerrainNumber(estiamtedRightColumn, objectDownRow);
+        if(b1.isCollide() == true||b2.isCollide() == true){
+            pm.setDoRightCollide(true);
+        }else{
+            pm.setDoRightCollide(false);
         }
     }
 }
