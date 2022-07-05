@@ -16,6 +16,11 @@ public class Chest extends gameObject {
     public double BIGY;
     public boolean isCollide;
     public gamePanel gp;
+    public Rectangle collideArea = new Rectangle(0,0,30,30);
+    public int collideAreaX = 0;
+    public int collideAreaY = 0;
+
+
     public Chest(String name, gamePanel gp, double x, double y){
         this.name = name;
         this.gp = gp;
@@ -35,22 +40,22 @@ public class Chest extends gameObject {
 
     @Override
     public double getBIGX() {
-        return 0;
+        return this.BIGX;
     }
 
     @Override
     public double getX() {
-        return 0;
+        return this.x;
     }
 
     @Override
     public double getY() {
-        return 0;
+        return this.y;
     }
 
     @Override
     public double getBIGY() {
-        return 0;
+        return this.BIGY;
     }
 
     @Override
@@ -59,4 +64,10 @@ public class Chest extends gameObject {
         double screeny = this.BIGY - gp.player1.getBIGY()+gp.player1.getY();
         g2d.drawImage(this.image, (int)screenx, (int)screeny, gp.currentSize, gp.currentSize, null);
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
 }

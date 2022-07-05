@@ -1,18 +1,22 @@
 package gameObjects.InteractableObjects;
 
 import Main.gamePanel;
+import gameObjects.gameObject;
+
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Placement {
     private gamePanel gp;
     private static Placement uniqueInstance;
+    public ArrayList<ArrayList<gameObject>> gameObejctList = new ArrayList<>();
     private ArrayList<Integer> chestXList = new ArrayList<>(); private ArrayList<Integer> chestYList = new ArrayList<>();
-    private ArrayList<Chest> chestList = new ArrayList<>();
+    private ArrayList<gameObject> chestList = new ArrayList<>();
 
     private Placement(gamePanel gp){
         this.gp = gp;
         this.addChest();
+        gameObejctList.add(chestList);
     }
 
     public static Placement getInstance(gamePanel gp) {
@@ -23,7 +27,7 @@ public class Placement {
     }
 
     public void placeObjects(Graphics2D g2d){
-        for(Chest thechest : chestList){
+        for(gameObject thechest : chestList){
             thechest.draw(g2d);
         }
     }
@@ -39,11 +43,7 @@ public class Placement {
             String chestName = "Chest" + count;
             Chest createdChest = new Chest(chestName, this.gp, BIGX, BIGY);
             chestList.add(createdChest);
+            count++;
         }
     }
-
-
-
-
-
 }

@@ -21,7 +21,11 @@ public abstract class gameObject {
     public abstract double getX();
     public abstract double getY();
     public abstract double getBIGY();
+    public Rectangle collideArea = new Rectangle(0,0,28,28);
+    public int collideAreaX = 0;
+    public int collideAreaY = 0;
     public abstract void draw(Graphics2D g2d);
+    public abstract String getName();
 //     String getName() {
 //        return name;
 //    }

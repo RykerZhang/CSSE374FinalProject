@@ -17,6 +17,9 @@ public class Player extends gameObject implements PlayerObserver {
     private gamePanel gp;
     private BufferedImage PlayerImgae;
     PlayerMove playerMove;
+    public Rectangle collideArea = new Rectangle(0,0,30,30);
+    public int collideAreaX = 0;
+    public int collideAreaY = 0;
 
     public Player(keyControl kc, gamePanel gp){
         this.isPlayer = false;
@@ -26,8 +29,7 @@ public class Player extends gameObject implements PlayerObserver {
        // this.BIGY = 100;
         this.kc = kc;
         this.gp = gp;
-
-        playerMove = new PlayerMove(kc, gp);
+        playerMove = new PlayerMove(kc, gp, this);
         playerMove.registerObserver(this);
     }
 
