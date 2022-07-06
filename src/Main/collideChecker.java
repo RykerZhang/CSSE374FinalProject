@@ -190,6 +190,46 @@ public class collideChecker {
                 break;
             }
         }
+        for (int j = 0; j < gp.goSetter.NPCList.size(); j++) {
+            pm.collideArea.x += pm.getBIGX();
+            pm.collideArea.y += pm.getBIGY();
+            gp.goSetter.NPCList.get(j).collideArea.x += gp.goSetter.NPCList.get(j).getBIGX();
+            gp.goSetter.NPCList.get(j).collideArea.y += gp.goSetter.NPCList.get(j).getBIGY();
+            if (pm.getDirection() == "up") {
+                pm.collideArea.y -= 1;
+                //   System.out.println(gp.placement.gameObejctList.get(j).get(i).getName());
+                if (pm.getCollideArea().intersects(gp.goSetter.NPCList.get(j).collideArea)) {
+                    pm.setDoUpObjectCollide(true);
+                    //   System.out.println("Up Collision");
+                    break;
+                }
+            } else if (pm.getDirection() == "right") {
+                pm.collideArea.y -= 1;
+                if (pm.getCollideArea().intersects(gp.goSetter.NPCList.get(j).collideArea)) {
+                    pm.setDoRightObjectCollide(true);
+                    break;
+                }
+            } else if (pm.getDirection() == "down") {
+                pm.collideArea.y -= 1;
+                if (pm.getCollideArea().intersects(gp.goSetter.NPCList.get(j).collideArea)) {
+                    pm.setDoDownObjectCollide(true);
+                    break;
+                }
+            } else if (pm.getDirection() == "left") {
+                pm.collideArea.y -= 1;
+                if (pm.getCollideArea().intersects(gp.goSetter.NPCList.get(j).collideArea)) {
+                    pm.setDoLeftObjectCollide(true);
+                    break;
+                }
+            }
+            pm.collideArea.x = pm.defaultCollideX;
+            pm.collideArea.y = pm.defaultCollideY;
+            gp.goSetter.NPCList.get(j).collideArea.x = gp.goSetter.NPCList.get(j).collideAreaX;
+            gp.goSetter.NPCList.get(j).collideArea.y = gp.goSetter.NPCList.get(j).collideAreaY;
+            if (pm.isDoUpObjectCollide() || pm.isDoRightObjectCollide() || pm.isDoLeftObjectCollide() || pm.isDoDownObjectCollide()) {
+                break;
+            }
+        }
         return index;
     }
 }

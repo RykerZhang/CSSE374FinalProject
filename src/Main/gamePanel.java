@@ -5,6 +5,8 @@ import gameObjects.InteractableObjects.Placement;
 import gameObjects.gameObject;
 import gameObjects.gameObjectFactory;
 import gameObjects.PlayerFactory;
+import gameObjects.gameObjectSetter;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -31,6 +33,9 @@ public class gamePanel extends JPanel implements Runnable{
     public Placement placement = Placement.getInstance(this);
     //UI
     public gameUI UI = new gameUI(this);
+    //gameObject Settler
+    public gameObjectSetter goSetter = new gameObjectSetter(this);
+    //NPCs
 
     public gamePanel(){
         super();
@@ -78,8 +83,10 @@ public class gamePanel extends JPanel implements Runnable{
         g2d.setColor(Color.WHITE);
         bgHandler.draw(g2d);
         player1.draw(g2d);
+        goSetter.setNPCs(g2d);
         placement.placeObjects(g2d);
         UI.draw(g2d);
+
         g2d.dispose();
     }
 

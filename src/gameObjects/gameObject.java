@@ -10,7 +10,9 @@ public abstract class gameObject {
     public double y;
     public double BIGX;
     public double BIGY;
-  //  public BufferedImage Image;
+    public String direction;
+    public BufferedImage upImage1, upImage2, leftImage1, leftImage2, rightImage1, rightImage2, downImage1, downImage2;
+    public BufferedImage NPCimage;
   //  public String direction;
   //  public boolean doUpCollide;
   //  public boolean doLeftCollide;
