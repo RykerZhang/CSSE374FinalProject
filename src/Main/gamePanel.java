@@ -29,6 +29,8 @@ public class gamePanel extends JPanel implements Runnable{
     public collideChecker cc = new collideChecker(this);
     //Placement
     public Placement placement = Placement.getInstance(this);
+    //UI
+    public gameUI UI = new gameUI(this);
 
     public gamePanel(){
         super();
@@ -77,7 +79,7 @@ public class gamePanel extends JPanel implements Runnable{
         bgHandler.draw(g2d);
         player1.draw(g2d);
         placement.placeObjects(g2d);
-
+        UI.draw(g2d);
         g2d.dispose();
     }
 

@@ -59,6 +59,16 @@ public class Chest extends gameObject {
     }
 
     @Override
+    public int getCol() {
+        return this.col;
+    }
+
+    @Override
+    public int getRow() {
+        return this.row;
+    }
+
+    @Override
     public void draw(Graphics2D g2d) {
         double screenx = this.BIGX - gp.player1.getBIGX()+gp.player1.getX();
         double screeny = this.BIGY - gp.player1.getBIGY()+gp.player1.getY();

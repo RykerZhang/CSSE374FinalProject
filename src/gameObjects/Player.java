@@ -20,6 +20,8 @@ public class Player extends gameObject implements PlayerObserver {
     public Rectangle collideArea = new Rectangle(0,0,30,30);
     public int collideAreaX = 0;
     public int collideAreaY = 0;
+    private int col;
+    private int row;
 
     public Player(keyControl kc, gamePanel gp){
         this.isPlayer = false;
@@ -31,6 +33,8 @@ public class Player extends gameObject implements PlayerObserver {
         this.gp = gp;
         playerMove = new PlayerMove(kc, gp, this);
         playerMove.registerObserver(this);
+        this.col = (int) (this.BIGX/gp.currentSize);
+        this.row = (int) (this.BIGY/gp.currentSize);
     }
 
     public void update(){
@@ -52,6 +56,8 @@ public class Player extends gameObject implements PlayerObserver {
         this.x = PlayerX;
         this.y = PlayerY;
         this.PlayerImgae = PlayerImage;
+        this.col = (int) (this.BIGX/gp.currentSize);
+        this.row = (int) (this.BIGY/gp.currentSize);
     }
 
     public void setName(String name){
@@ -77,5 +83,11 @@ public class Player extends gameObject implements PlayerObserver {
         return BIGY;
     }
 
+    public int getCol() {
+        return col;
+    }
 
+    public int getRow() {
+        return row;
+    }
 }
