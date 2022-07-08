@@ -125,8 +125,8 @@ public class PlayerMove implements PlayerSubject {
                 System.out.println(this.collideObject.isInteractable());
 
                 if(this.collideObject.isInteractable() ){
-
                     this.player.InteractNPC();
+                    this.player.interactingObject = this.collideObject;
                 }
             }
         }

@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Chest extends gameObject {
     public String name;
@@ -83,6 +84,11 @@ public class Chest extends gameObject {
     @Override
     public boolean isInteractable() {
         return false;
+    }
+
+    @Override
+    public ArrayList<String> readDialogueFile(int initialHelperAndPlayer) {
+        return null;
     }
 
 }

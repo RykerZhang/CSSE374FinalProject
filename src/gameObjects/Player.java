@@ -5,6 +5,7 @@ import Main.keyControl;
 import ObserversAndSubjects.PlayerObserver;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends gameObject implements PlayerObserver {
     private boolean isPlayer;
@@ -22,6 +23,7 @@ public class Player extends gameObject implements PlayerObserver {
     public int collideAreaY = 0;
     private int col;
     private int row;
+    public gameObject interactingObject;
 
     public Player(keyControl kc, gamePanel gp){
         this.isPlayer = false;
@@ -45,6 +47,7 @@ public class Player extends gameObject implements PlayerObserver {
 
     public void InteractNPC(){
         gp.gameState = gp.dialogueState;
+
     }
     public void draw(Graphics2D g2d){
        // System.out.println(this.x);
@@ -68,6 +71,11 @@ public class Player extends gameObject implements PlayerObserver {
 
     public String getName(){
         return this.Name;
+    }
+
+    @Override
+    public ArrayList<String> readDialogueFile(int number) {
+        return null;
     }
 
     @Override

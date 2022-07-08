@@ -2,6 +2,7 @@ package gameObjects;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public abstract class gameObject {
     public boolean isPlayer;
@@ -14,7 +15,9 @@ public abstract class gameObject {
     public BufferedImage upImage1, upImage2, leftImage1, leftImage2, rightImage1, rightImage2, downImage1, downImage2;
     public BufferedImage NPCimage;
     public boolean Interactable;
-  //  public String direction;
+    public gameObject interactingObject;
+
+    //  public String direction;
   //  public boolean doUpCollide;
   //  public boolean doLeftCollide;
   //  public boolean doRightCollide;
@@ -33,7 +36,7 @@ public abstract class gameObject {
     public int row;
     public abstract void draw(Graphics2D g2d);
     public abstract String getName();
-//     String getName() {
+    //     String getName() {
 //        return name;
 //    }
 
@@ -41,4 +44,6 @@ public abstract class gameObject {
       //  this.name = name;
    // }
     public abstract boolean isInteractable();
+
+    public abstract ArrayList<String> readDialogueFile(int initialHelperAndPlayer);
 }

@@ -36,10 +36,11 @@ public class gamePanel extends JPanel implements Runnable{
     //gameObject Settler
     public gameObjectSetter goSetter = new gameObjectSetter(this);
     //NPCs
-
+    public int initialHelperAndPlayer = 0;
     //gameState
     public int gameState;
     public int dialogueState = 1;
+
 
 
     public gamePanel(){

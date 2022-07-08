@@ -4,9 +4,11 @@ import Main.gamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class NPC_initialHelper extends gameObject{
     public int col;
@@ -15,7 +17,9 @@ public class NPC_initialHelper extends gameObject{
     public int BIGY;
     public String name;
     public boolean Interactable = true;
+    public ArrayList<String> dialogueFileNameList = new ArrayList<>();
     gamePanel gp;
+
     public NPC_initialHelper(gamePanel gp, String downURL, int col, int row, String direction){
         this.name = "InitialHelper";
         this.gp = gp;
@@ -26,6 +30,7 @@ public class NPC_initialHelper extends gameObject{
         this.BIGY = this.row*gp.currentSize;
         //this.Interactable = true;
         this.setImage(downURL);
+        this.manuallyAddDialogueFileName();
     }
 
     public void setImage(String downURL){
@@ -36,6 +41,21 @@ public class NPC_initialHelper extends gameObject{
         }
     }
 
+    @Override
+    public ArrayList<String> readDialogueFile(int number){
+        ArrayList<String> dialogueList = new ArrayList<>();
+        String filePath =this.dialogueFileNameList.get(number);
+        File dialogueFile = new File(filePath);
+        try {
+            Scanner scanner = new Scanner((dialogueFile));
+            while(scanner.hasNext()){
+                dialogueList.add(scanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return dialogueList;
+    }
 
 //    public void setNPC(Graphics2D g2d){
 //        BIGX = this.col*gp.currentSize;
@@ -82,7 +102,6 @@ public class NPC_initialHelper extends gameObject{
 
     @Override
     public void draw(Graphics2D g2d) {
-
     }
 
     @Override
@@ -92,5 +111,9 @@ public class NPC_initialHelper extends gameObject{
 
     public boolean isInteractable() {
         return Interactable;
+    }
+
+    public void manuallyAddDialogueFileName(){
+        this.dialogueFileNameList.add("InitialHelper0");
     }
 }

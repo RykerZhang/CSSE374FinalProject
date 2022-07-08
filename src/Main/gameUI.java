@@ -1,10 +1,12 @@
 package Main;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class gameUI {
     gamePanel gp;
     Font UIFont;
+    String currentDialogueSentence = "";
 
     public gameUI(gamePanel gp){
         this.gp = gp;
@@ -32,5 +34,10 @@ public class gameUI {
         Color dialogueColor = Color.BLACK;
         g2d.setColor(dialogueColor);
         g2d.fillRoundRect(x,y,width,height,40,40);
+        g2d.setColor(Color.WHITE);
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawRoundRect(x+1, y+3, width, height-6, 30,30);
+        ArrayList<String> dialogueList = this.gp.player1.interactingObject.readDialogueFile(this.gp.initialHelperAndPlayer);
+        
     }
 }
