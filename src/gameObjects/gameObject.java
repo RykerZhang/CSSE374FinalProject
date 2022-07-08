@@ -13,6 +13,7 @@ public abstract class gameObject {
     public String direction;
     public BufferedImage upImage1, upImage2, leftImage1, leftImage2, rightImage1, rightImage2, downImage1, downImage2;
     public BufferedImage NPCimage;
+    public boolean Interactable;
   //  public String direction;
   //  public boolean doUpCollide;
   //  public boolean doLeftCollide;
@@ -39,4 +40,5 @@ public abstract class gameObject {
    //  void setName(String name) {
       //  this.name = name;
    // }
+    public abstract boolean isInteractable();
 }

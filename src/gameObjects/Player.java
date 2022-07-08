@@ -31,7 +31,7 @@ public class Player extends gameObject implements PlayerObserver {
        // this.BIGY = 100;
         this.kc = kc;
         this.gp = gp;
-        playerMove = new PlayerMove(kc, gp, this);
+        playerMove = new PlayerMove(kc, gp, this, this);
         playerMove.registerObserver(this);
         this.col = (int) (this.BIGX/gp.currentSize);
         this.row = (int) (this.BIGY/gp.currentSize);
@@ -43,7 +43,9 @@ public class Player extends gameObject implements PlayerObserver {
 
     }
 
-
+    public void InteractNPC(){
+        gp.gameState = gp.dialogueState;
+    }
     public void draw(Graphics2D g2d){
        // System.out.println(this.x);
         g2d.drawImage(this.PlayerImgae, (int)this.x, (int)this.y, (int)gp.currentSize,(int)gp.currentSize,null);
@@ -67,6 +69,12 @@ public class Player extends gameObject implements PlayerObserver {
     public String getName(){
         return this.Name;
     }
+
+    @Override
+    public boolean isInteractable() {
+        return false;
+    }
+
     public double getX() {
         return x;
     }

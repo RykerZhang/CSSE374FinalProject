@@ -32,39 +32,8 @@ public class PlayerMove implements PlayerSubject {
     private boolean doUpObjectCollide;
     private boolean doLeftObjectCollide;
     private boolean doRightObjectCollide;
-
-    public boolean isDoUpObjectCollide() {
-        return doUpObjectCollide;
-    }
-
-    public void setDoUpObjectCollide(boolean doUpObjectCollide) {
-        this.doUpObjectCollide = doUpObjectCollide;
-    }
-
-    public boolean isDoLeftObjectCollide() {
-        return doLeftObjectCollide;
-    }
-
-    public void setDoLeftObjectCollide(boolean doLeftObjectCollide) {
-        this.doLeftObjectCollide = doLeftObjectCollide;
-    }
-
-    public boolean isDoRightObjectCollide() {
-        return doRightObjectCollide;
-    }
-
-    public void setDoRightObjectCollide(boolean doRightObjectCollide) {
-        this.doRightObjectCollide = doRightObjectCollide;
-    }
-
-    public boolean isDoDownObjectCollide() {
-        return doDownObjectCollide;
-    }
-
-    public void setDoDownObjectCollide(boolean doDownObjectCollide) {
-        this.doDownObjectCollide = doDownObjectCollide;
-    }
-
+    public gameObject collideObject = null;
+    public Player player;
     private boolean doDownObjectCollide;
     private String direction;
     public int defaultCollideX = 0;
@@ -72,7 +41,7 @@ public class PlayerMove implements PlayerSubject {
 
     gameObject go;
 
-    public PlayerMove(keyControl kc, gamePanel gp, gameObject go){
+    public PlayerMove(keyControl kc, gamePanel gp, gameObject go, Player player){
         this.gp = gp;
         this.setMoveImage();
         this.PlayerImage = this.getDefaultImage();
@@ -85,7 +54,9 @@ public class PlayerMove implements PlayerSubject {
         this.kc = kc;
         this.collideArea = new Rectangle(2,2, 26, 26);
         this.go = go;
+        this.player = player;
     }
+
     public void updatePlayerPosition(){
         this.checkCollision();
         this.switchSameDirectionImage();
@@ -149,6 +120,16 @@ public class PlayerMove implements PlayerSubject {
             }else{
             }
         }
+        if(kc.isPressInteract){
+            if(this.collideObject!=null){
+                System.out.println(this.collideObject.isInteractable());
+
+                if(this.collideObject.isInteractable() ){
+
+                    this.player.InteractNPC();
+                }
+            }
+        }
 
         this.notifyObservers();
     }
@@ -171,7 +152,7 @@ public class PlayerMove implements PlayerSubject {
         this.gp.cc.checkLeftCollision(this);
         this.gp.cc.checkDownCollision(this);
         this.gp.cc.checkRightCollision(this);
-        this.gp.cc.checkObjectCollision( true, this);
+        this.collideObject = gp.cc.checkObjectCollision( true, this);
     }
 
     public void setMoveImage(){
@@ -286,5 +267,35 @@ public class PlayerMove implements PlayerSubject {
     public String getDirection() {
         return direction;
     }
+    public boolean isDoUpObjectCollide() {
+        return doUpObjectCollide;
+    }
 
+    public void setDoUpObjectCollide(boolean doUpObjectCollide) {
+        this.doUpObjectCollide = doUpObjectCollide;
+    }
+
+    public boolean isDoLeftObjectCollide() {
+        return doLeftObjectCollide;
+    }
+
+    public void setDoLeftObjectCollide(boolean doLeftObjectCollide) {
+        this.doLeftObjectCollide = doLeftObjectCollide;
+    }
+
+    public boolean isDoRightObjectCollide() {
+        return doRightObjectCollide;
+    }
+
+    public void setDoRightObjectCollide(boolean doRightObjectCollide) {
+        this.doRightObjectCollide = doRightObjectCollide;
+    }
+
+    public boolean isDoDownObjectCollide() {
+        return doDownObjectCollide;
+    }
+
+    public void setDoDownObjectCollide(boolean doDownObjectCollide) {
+        this.doDownObjectCollide = doDownObjectCollide;
+    }
 }

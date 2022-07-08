@@ -37,6 +37,11 @@ public class gamePanel extends JPanel implements Runnable{
     public gameObjectSetter goSetter = new gameObjectSetter(this);
     //NPCs
 
+    //gameState
+    public int gameState;
+    public int dialogueState = 1;
+
+
     public gamePanel(){
         super();
         this.setPreferredSize(new Dimension((int)screenWidth, (int)screenHeight));

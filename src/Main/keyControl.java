@@ -1,10 +1,12 @@
 package Main;
 
+import javax.management.openmbean.KeyAlreadyExistsException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class keyControl implements KeyListener{
     public boolean isPressUp, isPressDown, isPressLeft, isPressRight;
+    public boolean isPressInteract;
 
 
     @Override
@@ -27,6 +29,9 @@ public class keyControl implements KeyListener{
         if(input == KeyEvent.VK_D){
             isPressRight = true;
         }
+        if(input == KeyEvent.VK_E){
+            isPressInteract = true;
+        }
     }
 
     @Override
@@ -43,6 +48,9 @@ public class keyControl implements KeyListener{
         }
         if(input == KeyEvent.VK_D){
             isPressRight = false;
+        }
+        if(input == KeyEvent.VK_E){
+            isPressInteract = false;
         }
     }
 }

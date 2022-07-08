@@ -20,9 +20,9 @@ public class gameObjectSetter {
             double screenx = go.getBIGX() - gp.player1.getBIGX()+gp.player1.getX();
             double screeny = go.getBIGY() - gp.player1.getBIGY()+gp.player1.getY();
             g2d.drawImage(go.NPCimage, (int)screenx, (int)screeny, gp.currentSize, gp.currentSize, null);
-            System.out.println(go.getRow());
+            //System.out.println(go.getRow());
            // System.out.println(gp.player1.getX());
-            System.out.println(go.NPCimage);
+          //  System.out.println(go.NPCimage);
         }
     }
 

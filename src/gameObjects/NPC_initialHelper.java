@@ -6,20 +6,25 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Random;
 
 public class NPC_initialHelper extends gameObject{
     public int col;
     public int row;
     public int BIGX;
     public int BIGY;
+    public String name;
+    public boolean Interactable = true;
     gamePanel gp;
     public NPC_initialHelper(gamePanel gp, String downURL, int col, int row, String direction){
+        this.name = "InitialHelper";
         this.gp = gp;
         direction = "down";
         this.col = col;
         this.row = row;
         this.BIGX = this.col*gp.currentSize;
         this.BIGY = this.row*gp.currentSize;
+        //this.Interactable = true;
         this.setImage(downURL);
     }
 
@@ -30,6 +35,7 @@ public class NPC_initialHelper extends gameObject{
             e.printStackTrace();
         }
     }
+
 
 //    public void setNPC(Graphics2D g2d){
 //        BIGX = this.col*gp.currentSize;
@@ -81,6 +87,10 @@ public class NPC_initialHelper extends gameObject{
 
     @Override
     public String getName() {
-        return null;
+        return this.name;
+    }
+
+    public boolean isInteractable() {
+        return Interactable;
     }
 }

@@ -80,4 +80,9 @@ public class Chest extends gameObject {
         return name;
     }
 
+    @Override
+    public boolean isInteractable() {
+        return false;
+    }
+
 }

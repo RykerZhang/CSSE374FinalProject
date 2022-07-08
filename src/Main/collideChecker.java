@@ -146,7 +146,7 @@ public class collideChecker {
 //    }
 
     //For Player Check
-    public int checkObjectCollision(boolean isPlayer, PlayerMove pm) {
+    public gameObject checkObjectCollision(boolean isPlayer, PlayerMove pm) {
         int index = 99;
         for (int j = 0; j < gp.placement.gameObejctList.size(); j++) {
             for (int i = 0; i < gp.placement.gameObejctList.get(j).size(); i++) {
@@ -159,26 +159,26 @@ public class collideChecker {
                  //   System.out.println(gp.placement.gameObejctList.get(j).get(i).getName());
                     if (pm.getCollideArea().intersects( gp.placement.gameObejctList.get(j).get(i).collideArea)) {
                         pm.setDoUpObjectCollide(true);
+                        return gp.placement.gameObejctList.get(j).get(i);
                      //   System.out.println("Up Collision");
-                        break;
                     }
                 } else if (pm.getDirection() == "right") {
                     pm.collideArea.y -= 1;
                     if (pm.getCollideArea().intersects( gp.placement.gameObejctList.get(j).get(i).collideArea)) {
                         pm.setDoRightObjectCollide(true);
-                        break;
+                        return gp.placement.gameObejctList.get(j).get(i);
                     }
                 } else if (pm.getDirection() == "down") {
                     pm.collideArea.y -= 1;
                     if (pm.getCollideArea().intersects( gp.placement.gameObejctList.get(j).get(i).collideArea)) {
                         pm.setDoDownObjectCollide(true);
-                        break;
+                        return gp.placement.gameObejctList.get(j).get(i);
                     }
                 } else if (pm.getDirection() == "left") {
                     pm.collideArea.y -=1;
                     if (pm.getCollideArea().intersects( gp.placement.gameObejctList.get(j).get(i).collideArea)) {
                         pm.setDoLeftObjectCollide(true);
-                        break;
+                        return gp.placement.gameObejctList.get(j).get(i);
                     }
                 }
                 pm.collideArea.x = pm.defaultCollideX;
@@ -200,26 +200,26 @@ public class collideChecker {
                 //   System.out.println(gp.placement.gameObejctList.get(j).get(i).getName());
                 if (pm.getCollideArea().intersects(gp.goSetter.NPCList.get(j).collideArea)) {
                     pm.setDoUpObjectCollide(true);
+                    return gp.goSetter.NPCList.get(j);
                     //   System.out.println("Up Collision");
-                    break;
                 }
             } else if (pm.getDirection() == "right") {
                 pm.collideArea.y -= 1;
                 if (pm.getCollideArea().intersects(gp.goSetter.NPCList.get(j).collideArea)) {
                     pm.setDoRightObjectCollide(true);
-                    break;
+                    return gp.goSetter.NPCList.get(j);
                 }
             } else if (pm.getDirection() == "down") {
                 pm.collideArea.y -= 1;
                 if (pm.getCollideArea().intersects(gp.goSetter.NPCList.get(j).collideArea)) {
                     pm.setDoDownObjectCollide(true);
-                    break;
+                    return gp.goSetter.NPCList.get(j);
                 }
             } else if (pm.getDirection() == "left") {
                 pm.collideArea.y -= 1;
                 if (pm.getCollideArea().intersects(gp.goSetter.NPCList.get(j).collideArea)) {
                     pm.setDoLeftObjectCollide(true);
-                    break;
+                    return gp.goSetter.NPCList.get(j);
                 }
             }
             pm.collideArea.x = pm.defaultCollideX;
@@ -230,6 +230,6 @@ public class collideChecker {
                 break;
             }
         }
-        return index;
+        return null;
     }
 }
