@@ -57,6 +57,11 @@ public class NPC_initialHelper extends gameObject{
         return dialogueList;
     }
 
+    @Override
+    public boolean isPressEnter() {
+        return false;
+    }
+
 //    public void setNPC(Graphics2D g2d){
 //        BIGX = this.col*gp.currentSize;
 //        BIGY = this.row* gp.currentSize;
@@ -114,6 +119,6 @@ public class NPC_initialHelper extends gameObject{
     }
 
     public void manuallyAddDialogueFileName(){
-        this.dialogueFileNameList.add("InitialHelper0");
+        this.dialogueFileNameList.add("src/Dialogues/InitialHelper0");
     }
 }

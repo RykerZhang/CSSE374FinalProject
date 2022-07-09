@@ -9,7 +9,11 @@ public class keyControl implements KeyListener{
     public boolean isPressUp, isPressDown, isPressLeft, isPressRight;
     public boolean isPressInteract;
     public boolean isPressEnter;
+    public gamePanel gp;
 
+    public keyControl(gamePanel gp){
+        this.gp = gp;
+    }
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -33,8 +37,9 @@ public class keyControl implements KeyListener{
         if(input == KeyEvent.VK_E){
             isPressInteract = true;
         }
-        if(input == KeyEvent.VK_ENTER){
+        if(input == KeyEvent.VK_ENTER && this.gp.gameState == this.gp.dialogueState){
             isPressEnter = true;
+            this.gp.UI.continueDialogue();
         }
     }
 

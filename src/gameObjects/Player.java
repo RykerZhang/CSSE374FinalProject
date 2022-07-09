@@ -24,6 +24,9 @@ public class Player extends gameObject implements PlayerObserver {
     private int col;
     private int row;
     public gameObject interactingObject;
+    public boolean isPressEnter;
+
+
 
     public Player(keyControl kc, gamePanel gp){
         this.isPlayer = false;
@@ -105,5 +108,9 @@ public class Player extends gameObject implements PlayerObserver {
 
     public int getRow() {
         return row;
+    }
+
+    public boolean isPressEnter() {
+        return this.kc.isPressEnter;
     }
 }

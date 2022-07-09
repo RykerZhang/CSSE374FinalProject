@@ -16,12 +16,6 @@ public abstract class gameObject {
     public BufferedImage NPCimage;
     public boolean Interactable;
     public gameObject interactingObject;
-
-    //  public String direction;
-  //  public boolean doUpCollide;
-  //  public boolean doLeftCollide;
-  //  public boolean doRightCollide;
-  //  public boolean doDownCollide;
     public abstract void update();
     public abstract double getBIGX();
     public abstract double getX();
@@ -36,14 +30,17 @@ public abstract class gameObject {
     public int row;
     public abstract void draw(Graphics2D g2d);
     public abstract String getName();
-    //     String getName() {
-//        return name;
-//    }
-
-   //  void setName(String name) {
-      //  this.name = name;
-   // }
     public abstract boolean isInteractable();
-
     public abstract ArrayList<String> readDialogueFile(int initialHelperAndPlayer);
+
+    //Only for gameObject
+    public abstract boolean isPressEnter();
+
+    public gameObject getInteractingObject() {
+        return interactingObject;
+    }
+
+    public void setInteractingObject(gameObject interactingObject) {
+        this.interactingObject = interactingObject;
+    }
 }

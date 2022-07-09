@@ -16,7 +16,7 @@ public class gamePanel extends JPanel implements Runnable{
     public int screenRow = 16;
     public double screenWidth = screenColumn * currentSize;
     public double screenHeight = screenRow * currentSize;
-    private keyControl kc = new keyControl();
+    private keyControl kc = new keyControl(this);
     private Thread thread;
     private int FPS = 60;
     public int BIGCOL = 72;
@@ -39,6 +39,7 @@ public class gamePanel extends JPanel implements Runnable{
     public int initialHelperAndPlayer = 0;
     //gameState
     public int gameState;
+    public int playingState = 0;
     public int dialogueState = 1;
 
 

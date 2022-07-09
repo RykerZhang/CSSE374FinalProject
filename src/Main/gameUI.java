@@ -7,7 +7,7 @@ public class gameUI {
     gamePanel gp;
     Font UIFont;
     String currentDialogueSentence = "";
-
+    int sentanceNumber = 0;
     public gameUI(gamePanel gp){
         this.gp = gp;
         UIFont=new Font(("ARIAL"),Font.BOLD, 12);
@@ -37,7 +37,29 @@ public class gameUI {
         g2d.setColor(Color.WHITE);
         g2d.setStroke(new BasicStroke(3));
         g2d.drawRoundRect(x+1, y+3, width, height-6, 30,30);
-        ArrayList<String> dialogueList = this.gp.player1.interactingObject.readDialogueFile(this.gp.initialHelperAndPlayer);
-        
+        ArrayList<String> dialogueList = this.gp.player1.getInteractingObject().readDialogueFile(this.gp.initialHelperAndPlayer);
+        this.displayLines(dialogueList, g2d, sentanceNumber);
+    }
+
+    public void displayLines(ArrayList<String> dialogueList, Graphics2D g2d, int sentanceNumber){
+        if(sentanceNumber<dialogueList.size()) {
+            this.currentDialogueSentence = dialogueList.get(sentanceNumber);
+            int x = 720 - (int) (gp.screenWidth - 50) - 25 + gp.currentSize;
+            int y = 320 - (int) (gp.screenHeight / 3) / 3 + gp.currentSize;
+            if (this.gp.gameState == this.gp.dialogueState) {
+                for (String str : currentDialogueSentence.split("\n")) {
+                    g2d.drawString(str, x, y);
+                    y += 40;
+                }
+            }
+        }else{
+            this.gp.gameState = this.gp.playingState;
+            this.sentanceNumber = 0;
+            System.out.println(this.gp.gameState);
+            g2d.clearRect(0,0,0,0);
+        }
+    }
+    public void continueDialogue(){
+        this.sentanceNumber++;
     }
 }

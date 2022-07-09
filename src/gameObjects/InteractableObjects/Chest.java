@@ -91,4 +91,9 @@ public class Chest extends gameObject {
         return null;
     }
 
+    @Override
+    public boolean isPressEnter() {
+        return false;
+    }
+
 }
