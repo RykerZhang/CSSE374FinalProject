@@ -31,7 +31,7 @@ public class gameObjectSetter {
             double screeny = go.getBIGY() - gp.player1.getBIGY() + gp.player1.getY();
             g2d.drawImage(go.ObjectImage, (int) screenx, (int) screeny, gp.currentSize, gp.currentSize, null);
             g2d.setColor(Color.red);
-            g2d.fillRect((int) screenx, (int) screeny, go.collideArea.width, go.collideArea.height);
+            //g2d.fillRect((int) screenx, (int) screeny, go.collideArea.width, go.collideArea.height);
             go.OutOfCombatMovement();
 
 
