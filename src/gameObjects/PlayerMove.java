@@ -32,9 +32,9 @@ public class PlayerMove implements PlayerSubject {
     private boolean doUpObjectCollide;
     private boolean doLeftObjectCollide;
     private boolean doRightObjectCollide;
+    private boolean doDownObjectCollide;
     public gameObject collideObject = null;
     public Player player;
-    private boolean doDownObjectCollide;
     private String direction;
     public int defaultCollideX = 0;
     public int defaultCollideY = 0;
@@ -148,11 +148,11 @@ public class PlayerMove implements PlayerSubject {
 //        this.doLeftObjectCollide = false;
 //        this.doRightObjectCollide = false;
         this.gp.cc.checkSpeed(this);
+        this.collideObject = gp.cc.checkObjectCollision( true, this);
         this.gp.cc.checkUpCollision(this);
         this.gp.cc.checkLeftCollision(this);
         this.gp.cc.checkDownCollision(this);
         this.gp.cc.checkRightCollision(this);
-        this.collideObject = gp.cc.checkObjectCollision( true, this);
     }
 
     public void setMoveImage(){

@@ -41,7 +41,7 @@ public class gamePanel extends JPanel implements Runnable{
     public int gameState;
     public int playingState = 0;
     public int dialogueState = 1;
-
+    public int startState = 2;
 
 
     public gamePanel(){
@@ -51,6 +51,7 @@ public class gamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.addKeyListener(kc);
         this.setFocusable(true);
+        this.gameState = startState;
     }
 
     public void startThread(){
@@ -87,12 +88,18 @@ public class gamePanel extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.WHITE);
-        bgHandler.draw(g2d);
-        player1.draw(g2d);
-        goSetter.setNPCs(g2d);
-        placement.placeObjects(g2d);
+
+        if(gameState == startState){
+
+        }else{
+            g2d.setColor(Color.WHITE);
+            bgHandler.draw(g2d);
+            player1.draw(g2d);
+            goSetter.setNPCs(g2d);
+            placement.placeObjects(g2d);
+        }
         UI.draw(g2d);
+
 
         g2d.dispose();
     }

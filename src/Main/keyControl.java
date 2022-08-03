@@ -22,6 +22,29 @@ public class keyControl implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         int input = e.getKeyCode();
+        if(input == KeyEvent.VK_ENTER && this.gp.gameState == this.gp.dialogueState){
+            isPressEnter = true;
+            this.gp.UI.continueDialogue();
+        }
+        //command in the start screen
+        if(this.gp.gameState == this.gp.startState){
+            if(input == KeyEvent.VK_S){
+                if(this.gp.UI.startMenuChoose<2){
+                    this.gp.UI.startMenuChoose++;
+                }
+            }
+            if(input == KeyEvent.VK_W){
+                if(this.gp.UI.startMenuChoose>0){
+                    this.gp.UI.startMenuChoose--;
+                }
+            }
+            if(input == KeyEvent.VK_ENTER && this.gp.UI.startMenuChoose == 0){
+                gp.gameState = gp.playingState;
+            }
+            if(input == KeyEvent.VK_ENTER && this.gp.UI.startMenuChoose == 2){
+                System.exit(0);
+            }
+        }
         if(input == KeyEvent.VK_W){
             isPressUp = true;
         }
@@ -37,10 +60,8 @@ public class keyControl implements KeyListener{
         if(input == KeyEvent.VK_E){
             isPressInteract = true;
         }
-        if(input == KeyEvent.VK_ENTER && this.gp.gameState == this.gp.dialogueState){
-            isPressEnter = true;
-            this.gp.UI.continueDialogue();
-        }
+
+
     }
 
     @Override

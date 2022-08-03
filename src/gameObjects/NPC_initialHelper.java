@@ -22,8 +22,8 @@ public class NPC_initialHelper extends gameObject{
 
     public NPC_initialHelper(gamePanel gp, String downURL, int col, int row, String direction){
         this.name = "InitialHelper";
-        this.gp = gp;
         direction = "down";
+        this.gp = gp;
         this.col = col;
         this.row = row;
         this.BIGX = this.col*gp.currentSize;
@@ -35,7 +35,7 @@ public class NPC_initialHelper extends gameObject{
 
     public void setImage(String downURL){
         try {
-            this.NPCimage = ImageIO.read(new FileInputStream(downURL));
+            this.ObjectImage = ImageIO.read(new FileInputStream(downURL));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,6 +60,11 @@ public class NPC_initialHelper extends gameObject{
     @Override
     public boolean isPressEnter() {
         return false;
+    }
+
+    @Override
+    public void OutOfCombatMovement() {
+
     }
 
 //    public void setNPC(Graphics2D g2d){
@@ -119,6 +124,6 @@ public class NPC_initialHelper extends gameObject{
     }
 
     public void manuallyAddDialogueFileName(){
-        this.dialogueFileNameList.add("src/Dialogues/InitialHelper0");
+        this.dialogueFileNameList.add("src/Dialogues/InitialHelper0 ");
     }
 }

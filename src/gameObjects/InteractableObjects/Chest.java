@@ -96,4 +96,9 @@ public class Chest extends gameObject {
         return false;
     }
 
+    @Override
+    public void OutOfCombatMovement() {
+
+    }
+
 }

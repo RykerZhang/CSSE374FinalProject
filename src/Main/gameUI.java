@@ -8,6 +8,7 @@ public class gameUI {
     Font UIFont;
     String currentDialogueSentence = "";
     int sentanceNumber = 0;
+    int startMenuChoose = 0;
     public gameUI(gamePanel gp){
         this.gp = gp;
         UIFont=new Font(("ARIAL"),Font.BOLD, 12);
@@ -21,6 +22,47 @@ public class gameUI {
         g2d.drawString(positionString,5, 15);
 
         //Dialogue state:
+        if(gp.gameState == gp.startState){
+            g2d.setFont(g2d.getFont().deriveFont(40F));
+            String title = "Yujie Zhang's Game";
+            int x =200 ;
+            int y = gp.currentSize*3;
+            g2d.setColor(Color.white);
+            g2d.drawString(title, x,y);
+            g2d.setFont(g2d.getFont().deriveFont(20F));
+
+            g2d.setColor(Color.WHITE);
+            title = "New Game";
+            x = 200;
+            y = gp.currentSize*5;
+            if(startMenuChoose == 0){
+                g2d.setColor(Color.CYAN);
+            }
+            g2d.drawString(title,x,y);
+
+            g2d.setColor(Color.WHITE);
+            title = "Load Game";
+            x = 200;
+            y += gp.currentSize;
+            if(startMenuChoose == 1){
+                g2d.setColor(Color.CYAN);
+
+            }
+            g2d.drawString(title,x,y);
+
+            g2d.setColor(Color.WHITE);
+            title = "Exit";
+            x = 200;
+            y += gp.currentSize;
+            if(startMenuChoose == 2){
+                g2d.setColor(Color.CYAN);
+            }
+            g2d.drawString(title,x,y);
+        }
+
+        if(gp.gameState == gp.playingState){
+
+        }
         if(gp.gameState == gp.dialogueState){
             displayDialogue(g2d);
         }
@@ -62,4 +104,5 @@ public class gameUI {
     public void continueDialogue(){
         this.sentanceNumber++;
     }
+
 }

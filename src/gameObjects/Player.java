@@ -18,13 +18,15 @@ public class Player extends gameObject implements PlayerObserver {
     private gamePanel gp;
     private BufferedImage PlayerImgae;
     PlayerMove playerMove;
-    public Rectangle collideArea = new Rectangle(0,0,30,30);
+    public Rectangle collideArea = new Rectangle(2,2,26,26);
     public int collideAreaX = 0;
     public int collideAreaY = 0;
     private int col;
     private int row;
     public gameObject interactingObject;
     public boolean isPressEnter;
+    public int HP =100;
+
 
 
 
@@ -53,7 +55,8 @@ public class Player extends gameObject implements PlayerObserver {
 
     }
     public void draw(Graphics2D g2d){
-       // System.out.println(this.x);
+        g2d.setColor(Color.red);
+        g2d.fillRect(6, 25, this.HP*2, 10);
         g2d.drawImage(this.PlayerImgae, (int)this.x, (int)this.y, (int)gp.currentSize,(int)gp.currentSize,null);
     }
 
@@ -87,30 +90,35 @@ public class Player extends gameObject implements PlayerObserver {
     }
 
     public double getX() {
-        return x;
+        return this.x;
     }
 
     public double getY() {
-        return y;
+        return this.y;
     }
 
     public double getBIGX() {
-        return BIGX;
+        return this.BIGX;
     }
 
     public double getBIGY() {
-        return BIGY;
+        return this.BIGY;
     }
 
     public int getCol() {
-        return col;
+        return this.col;
     }
 
     public int getRow() {
-        return row;
+        return this.row;
     }
 
     public boolean isPressEnter() {
         return this.kc.isPressEnter;
+    }
+
+    @Override
+    public void OutOfCombatMovement() {
+
     }
 }
