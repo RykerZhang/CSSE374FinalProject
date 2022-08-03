@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public abstract class gameObject {
+    public boolean hurtWhenCollide = false;
     public boolean isPlayer;
     public String name;
     public double x;

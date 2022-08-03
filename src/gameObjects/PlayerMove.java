@@ -38,6 +38,8 @@ public class PlayerMove implements PlayerSubject {
     private String direction;
     public int defaultCollideX = 0;
     public int defaultCollideY = 0;
+    public int HP;
+
 
     gameObject go;
 
@@ -55,6 +57,7 @@ public class PlayerMove implements PlayerSubject {
         this.collideArea = new Rectangle(2,2, 26, 26);
         this.go = go;
         this.player = player;
+        this.HP = 100;
     }
 
     public void updatePlayerPosition(){
@@ -134,6 +137,14 @@ public class PlayerMove implements PlayerSubject {
         this.notifyObservers();
     }
 
+    public void updateHP(){
+        if(this.doLeftObjectCollide||this.doRightObjectCollide||this.doUpObjectCollide||this.doDownObjectCollide){
+            if(this.collideObject!=null&&this.collideObject.hurtWhenCollide){
+                this.HP--;
+            }
+        }
+
+    }
     public void setCollideArea(Rectangle collideArea) {
         this.collideArea = collideArea;
     }
@@ -182,6 +193,13 @@ public class PlayerMove implements PlayerSubject {
         }
         return this.imageChoose;
     }
+
+
+
+
+
+
+
     public BufferedImage getDefaultImage(){
         return playerFront1;
     }
@@ -200,6 +218,7 @@ public class PlayerMove implements PlayerSubject {
     public void notifyObservers() {
         for (PlayerObserver o: playerObservers){
             o.updatePlayerPosition((int)this.BIGX, (int)this.BIGY, this.PlayerImage,(int) this.x, (int)this.y);
+            o.updatePlayerHP(this.HP);
         }
     }
 

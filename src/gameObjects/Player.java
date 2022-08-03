@@ -45,7 +45,7 @@ public class Player extends gameObject implements PlayerObserver {
     }
 
     public void update(){
-
+        playerMove.updateHP();
         playerMove.updatePlayerPosition();
 
     }
@@ -69,6 +69,11 @@ public class Player extends gameObject implements PlayerObserver {
         this.PlayerImgae = PlayerImage;
         this.col = (int) (this.BIGX/gp.currentSize);
         this.row = (int) (this.BIGY/gp.currentSize);
+    }
+
+    @Override
+    public void updatePlayerHP(int currentHP) {
+        this.HP = currentHP;
     }
 
     public void setName(String name){

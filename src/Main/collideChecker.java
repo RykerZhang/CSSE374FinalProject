@@ -464,6 +464,7 @@ public class collideChecker {
             if(goRCol1 == goLCol2){
                 if(go1.getDirection() == "right"){
                     go1.setDoRightObjectCollide(true);
+                    go1.collideObject = go2;
                 }else{
                     go1.setDoRightObjectCollide(false);
                 }
@@ -472,6 +473,8 @@ public class collideChecker {
             if(goLCol1 == goRCol2){
                 if(go1.getDirection() == "left"){
                     go1.setDoLeftObjectCollide(true);
+                    go1.collideObject = go2;
+
                 }else{
                     go1.setDoLeftObjectCollide(false);
                 }
@@ -480,6 +483,8 @@ public class collideChecker {
             if(goDRow1 == goURow2){
                 if(go1.getDirection() == "down"){
                     go1.setDoDownObjectCollide(true);
+                    go1.collideObject = go2;
+                    //System.out.println(go1.collideObject.hurtWhenCollide);
                 }else{
                     go1.setDoDownObjectCollide(false);
                 }
@@ -488,6 +493,8 @@ public class collideChecker {
             if(goURow1 == goDRow2) {
                 if (go1.getDirection() == "up") {
                     go1.setDoUpObjectCollide(true);
+                    go1.collideObject = go2;
+
                 } else {
                     go1.setDoUpObjectCollide(false);
                 }
@@ -498,5 +505,6 @@ public class collideChecker {
             go1.setDoLeftObjectCollide(false);
             go1.setDoRightObjectCollide(false);
         }
+        go1.updateHP();
     }
 }

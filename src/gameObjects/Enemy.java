@@ -47,6 +47,7 @@ public class Enemy extends gameObject{
         this.row = row;
         this.BIGX = this.col*gp.currentSize;
         this.BIGY = this.row*gp.currentSize;
+        this.hurtWhenCollide = true;
     }
 
     public void setEightImage(){
