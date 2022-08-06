@@ -1,39 +1,26 @@
-package gameObjects.InteractableObjects;
+package gameObjects.Equipment;
 
 import Main.gamePanel;
 import gameObjects.gameObject;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Chest extends gameObject {
-    public String name;
-    public BufferedImage image;
-    public double BIGX;
-    public double BIGY;
-    public boolean isCollide;
-    public gamePanel gp;
-    public Rectangle collideArea = new Rectangle(0,0,30,30);
-    public int collideAreaX = 0;
-    public int collideAreaY = 0;
+public class WoodSword extends gameObject {
 
-
-    public Chest(String name, gamePanel gp, double x, double y){
-        this.name = name;
-        this.gp = gp;
-        this.isCollide = true;
-        this.BIGX = x;
-        this.BIGY = y;
+    public WoodSword(gamePanel gp){
+        this.name = "Wood Sword";
         try {
-            this.image = ImageIO.read(new FileInputStream("./src/Pictures/InteractableObjects/chest1.png"));
+            this.ObjectImage = ImageIO.read(new FileInputStream("./src/Pictures/Weapons/WoodSword16.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.attack = 1;
     }
+
     @Override
     public void update() {
 
@@ -71,19 +58,17 @@ public class Chest extends gameObject {
 
     @Override
     public void draw(Graphics2D g2d) {
-        double screenx = this.BIGX - gp.player1.getBIGX()+gp.player1.getX();
-        double screeny = this.BIGY - gp.player1.getBIGY()+gp.player1.getY();
-        g2d.drawImage(this.image, (int)screenx, (int)screeny, gp.currentSize, gp.currentSize, null);
+
     }
 
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
 
     @Override
     public boolean isInteractable() {
-        return false;
+        return true;
     }
 
     @Override
@@ -110,5 +95,4 @@ public class Chest extends gameObject {
     public void getHurt(int attack) {
 
     }
-
 }

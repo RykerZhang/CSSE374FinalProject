@@ -48,11 +48,13 @@ public class Enemy extends gameObject{
         this.BIGX = this.col*gp.currentSize;
         this.BIGY = this.row*gp.currentSize;
         this.hurtWhenCollide = true;
+        this.HP = 80;
     }
 
     public void setEightImage(){
 
     }
+
     public void OutOfCombatMovement(){
         if(this.direction == "left"){
 
@@ -91,9 +93,14 @@ public class Enemy extends gameObject{
 
     }
 
+    @Override
+    public boolean isDoAttack() {
+        return false;
+    }
+
     public void move(){
         //System.out.println(this.doDownCollide);
-        this.gp.cc.objectCheckCollisionWithPlayer(this, this.gp.player1);
+        this.gp.cc.objectCheckCollisionWithPlayer(this.gp.player1, this);
         this.switchSameDirectionImage();
         if(direction == "down"){
 
@@ -162,6 +169,10 @@ public class Enemy extends gameObject{
         return this.imageChoose;
     }
 
+    public void getHurt(int Attack){
+        this.HP -= Attack;
+
+    }
     public void checkCollision(){
         this.gp.cc.checkUpCollisionForObject(this);
         this.gp.cc.checkLeftCollisionForObject(this);

@@ -382,7 +382,7 @@ public class collideChecker {
         return null;
     }
 
-    public void objectCheckCollisionWithPlayer(gameObject go1, gameObject go2){
+    public void objectCheckCollisionWithPlayer(Player go1, gameObject go2){
         int goLBigX1 = (int) (go1.getBIGX()+go1.collideArea.x);
         int goRBigX1 = (int) (go1.getBIGX()+go1.collideArea.x+go1.collideArea.width);
         int goUBigY1 = (int) (go1.getBIGY()+go1.collideArea.y);
@@ -396,10 +396,42 @@ public class collideChecker {
         int goRBigX2 = (int) (go2.getBIGX()+go2.collideArea.x+go2.collideArea.width);
         int goUBigY2 = (int) (go2.getBIGY()+go2.collideArea.y);
         int goDBigY2 = (int) (go2.getBIGY()+go2.collideArea.y+go2.collideArea.height);
+        int goRAttackX11 = goRBigX1+15;
+        int goLAttackX11 = goLBigX1-15;
+        int goUAttackY11 = goUBigY1-15;
+        int goDAttackY11 = goDBigY1+15;
         int goLCol2 = goLBigX2 / this.gp.currentSize;
         int goRCol2 = goRBigX2/this.gp.currentSize;
         int goURow2 = goUBigY2/this.gp.currentSize;
         int goDRow2 = goDBigY2/this.gp.currentSize;
+
+        //check attack hitbox
+         if(go1.isDoAttack() == true) {
+            System.out.println("I attack!");
+            if (goRAttackX11 > goRBigX2 && goRBigX2 > goRBigX1) {
+                go2.getHurt(12);
+                System.out.println("Enemy is hit R");
+            }
+            else if (goLAttackX11 < goLBigX2 && goLBigX2 < goLBigX1) {
+                go2.getHurt(12);
+
+                System.out.println("Enemy is hit L");
+
+            }
+            else if(goUAttackY11<goDBigY2 && goDBigY2> goUBigY1){
+                go2.getHurt(12);
+
+                System.out.println("Enemy is hit U");
+
+            }
+            else if(goDAttackY11>goDBigY2&& goDBigY1<goDBigY2){
+                go2.getHurt(12);
+
+                System.out.println("Enemy is hit D");
+
+            }
+        }
+
 
         if((goRCol1 == goLCol2 || goLCol1 == goRCol2)&&(goDRow1 == goURow2 || goURow1 == goDRow2)){
             if(goRCol1 == goLCol2){

@@ -38,6 +38,9 @@ public abstract class gameObject {
     public  boolean doDownObjectCollide;
     public  boolean doUpObjectCollide;
     public int speed;
+    public int HP;
+    public int attack;
+    public boolean doAttack;
     public abstract void draw(Graphics2D g2d);
     public abstract String getName();
     public abstract boolean isInteractable();
@@ -127,4 +130,15 @@ public abstract class gameObject {
         this.doUpObjectCollide = doUpObjectCollide;
     }
 
+    public int getHP() {
+        return HP;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public abstract boolean isDoAttack();
+
+    public abstract void getHurt(int attack);
 }

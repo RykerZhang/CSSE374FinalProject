@@ -33,8 +33,14 @@ public class gameObjectSetter {
             g2d.setColor(Color.red);
             //g2d.fillRect((int) screenx, (int) screeny, go.collideArea.width, go.collideArea.height);
             go.OutOfCombatMovement();
-
-
+            g2d.setColor(Color.red);
+            g2d.fillRect((int)screenx, (int)screeny - 15, go.HP/4, 5);
+            g2d.setColor(Color.gray);
+            g2d.fillRect((int) screenx+ go.HP/4, (int)screeny - 15, 25-go.HP/4, 5);
+            //System.out.println(go.getHP());
+            if(go.getHP()<=0){
+                this.EnemyList.remove(go);
+            }
             // System.out.println(go.getBIGX());
            // System.out.println(go.getBIGY());
         }

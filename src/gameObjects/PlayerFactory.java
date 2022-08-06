@@ -10,7 +10,7 @@ public class PlayerFactory extends gameObjectFactory {
         this.gp = gp;
         this.kc = kc;
     }
-    protected gameObject createPlayer(){
+    public Player createPlayer(){
         return new Player(kc, gp);
     }
 

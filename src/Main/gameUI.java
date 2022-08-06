@@ -1,6 +1,9 @@
 package Main;
 
+import gameObjects.Player;
+
 import java.awt.*;
+import java.io.Serial;
 import java.util.ArrayList;
 
 public class gameUI {
@@ -66,8 +69,88 @@ public class gameUI {
         if(gp.gameState == gp.dialogueState){
             displayDialogue(g2d);
         }
+        if(gp.gameState == gp.propertyState){
+            displayCharacterProperty(g2d);
+        }
+        if(gp.gameState == gp.deathState){
+            showEnd(g2d);
+        }
     }
 
+    public void showEnd(Graphics2D g2d){
+        int x = gp.currentSize*3;
+        int y = gp.currentSize*2;
+        int width = gp.currentSize*20;
+        int height = gp.currentSize*10;
+        this.drawWindowInside(g2d, x, y, width, height);
+        x+=160;
+        y+=60;
+        g2d.setColor(Color.red);
+        Font propertyFont = new Font("Arial", Font.BOLD, 54);
+        g2d.setFont(propertyFont);
+        g2d.drawString("You Died ", x, y);
+
+        Font propertyFont2 = new Font("Arial", Font.BOLD, 24);
+        g2d.setFont(propertyFont2);
+
+    }
+    public void displayCharacterProperty(Graphics2D g2d){
+        int x = gp.currentSize*2;
+        int y = gp.currentSize;
+        int width = gp.currentSize*20;
+        int height = gp.currentSize*12;
+        this.drawWindowInside(g2d, x, y, width, height);
+        //show property
+        g2d.setColor(Color.white);
+        int lineInterval = 30;
+        x+=10;
+        y+=lineInterval;
+        Font propertyFont = new Font("Arial", Font.BOLD, 14);
+        g2d.setFont(propertyFont);
+        g2d.drawString("Level: ", x, y);
+        String level = String.valueOf(this.gp.player1.getLevel());
+        g2d.drawString(level, x+this.getStringDisplayedLength("Level ", g2d)+5,y );
+        y+=lineInterval;
+        g2d.drawString("HP: ", x, y);
+        String HP = String.valueOf(this.gp.player1.getHP());
+        g2d.drawString(HP, x+this.getStringDisplayedLength("HP ", g2d)+5,y );
+        y+=lineInterval;
+        g2d.drawString("Attack: ", x, y);
+        String attack = String.valueOf(this.gp.player1.getAttack());
+        g2d.drawString(attack, x+this.getStringDisplayedLength("Attack ", g2d)+5,y );
+        y+=lineInterval;
+        g2d.drawString("Defense: ", x, y);
+        String defense = String.valueOf(this.gp.player1.getDefense());
+        g2d.drawString(defense, x+this.getStringDisplayedLength("Defense ", g2d)+5,y );
+        y+=lineInterval;
+        g2d.drawString("Exp: ", x, y);
+        String Exp = String.valueOf(this.gp.player1.getExperience());
+        g2d.drawString(Exp, x+this.getStringDisplayedLength("Exp ", g2d)+5,y );
+        y+=lineInterval-10;
+        g2d.drawString("Current Weapon: ", x, y);
+        if(this.gp.player1.getCurrentWeapon()!=null){
+            String currentWeapon = String.valueOf(this.gp.player1.getCurrentWeapon().getName());
+            g2d.drawImage(this.gp.player1.getCurrentWeapon().ObjectImage, x+this.getStringDisplayedLength("Current Weapon ", g2d)+5,y, null);
+        }else{
+            g2d.drawString("No Weapon", x+this.getStringDisplayedLength("Current Weapon ", g2d)+5,y );
+        }
+        y+=lineInterval;
+        g2d.drawString("Current Armor: ", x, y);
+        if(this.gp.player1.getCurrentArmor() != null){
+            g2d.drawImage(this.gp.player1.getCurrentArmor().ObjectImage, x+this.getStringDisplayedLength("Current Armor ", g2d)+5,y, null);
+        }else{
+            g2d.drawString("No Armor", x+this.getStringDisplayedLength("Current Armor ", g2d)+5,y );
+        }
+
+    }
+
+    public void drawWindowInside(Graphics2D g2d, int x, int y, int width, int height){
+        g2d.setColor( new Color(0,0,0,100));
+        g2d.fillRoundRect(x,y,width,height,40,40);
+        g2d.setColor(Color.white);
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawRoundRect(x+1, y+3, width, height-6, 30,30);
+    }
     public void displayDialogue(Graphics2D g2d){
         int height = (int) (gp.screenHeight/3);
         int width = (int) (gp.screenWidth - 50);
@@ -104,5 +187,8 @@ public class gameUI {
     public void continueDialogue(){
         this.sentanceNumber++;
     }
-
+    public int getStringDisplayedLength(String string, Graphics2D g2d){
+        int width = g2d.getFontMetrics().stringWidth(string);
+        return width;
+    }
 }

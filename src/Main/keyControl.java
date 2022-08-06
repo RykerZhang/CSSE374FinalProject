@@ -9,8 +9,9 @@ public class keyControl implements KeyListener{
     public boolean isPressUp, isPressDown, isPressLeft, isPressRight;
     public boolean isPressInteract;
     public boolean isPressEnter;
+    public boolean isPressTab;
     public gamePanel gp;
-
+    public boolean isAttack;
     public keyControl(gamePanel gp){
         this.gp = gp;
     }
@@ -60,6 +61,15 @@ public class keyControl implements KeyListener{
         if(input == KeyEvent.VK_E){
             isPressInteract = true;
         }
+        if(gp.gameState == gp.playingState&&input == KeyEvent.VK_J){
+            isAttack = true;
+        }
+        if(input == KeyEvent.VK_P&&gp.gameState == gp.playingState) {
+            isPressTab = true;
+            gp.gameState = gp.propertyState;
+        }else if(gp.gameState == gp.propertyState && input == KeyEvent.VK_P){
+            gp.gameState = gp.playingState;
+        }
 
 
     }
@@ -84,6 +94,12 @@ public class keyControl implements KeyListener{
         }
         if(input == KeyEvent.VK_ENTER){
             isPressEnter = false;
+        }
+        if(input == KeyEvent.VK_P){
+            isPressTab = false;
+        }
+        if(input == KeyEvent.VK_J){
+            isAttack = false;
         }
     }
 }

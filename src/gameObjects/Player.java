@@ -3,6 +3,8 @@ package gameObjects;
 import Main.gamePanel;
 import Main.keyControl;
 import ObserversAndSubjects.PlayerObserver;
+import gameObjects.Equipment.WoodSword;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -25,8 +27,15 @@ public class Player extends gameObject implements PlayerObserver {
     private int row;
     public gameObject interactingObject;
     public boolean isPressEnter;
-    public int HP =100;
-
+    public int HP = 100;
+    public int attack;
+    public int defense;
+    public int experience;
+    public int level;
+    public gameObject currentWeapon;
+    public gameObject currentArmor;
+    public int money;
+    public boolean doAttack;
 
 
 
@@ -34,14 +43,21 @@ public class Player extends gameObject implements PlayerObserver {
         this.isPlayer = false;
         this.x = 100;
         this.y = 100;
-        //this.BIGX = 100;
-       // this.BIGY = 100;
         this.kc = kc;
         this.gp = gp;
         playerMove = new PlayerMove(kc, gp, this, this);
         playerMove.registerObserver(this);
         this.col = (int) (this.BIGX/gp.currentSize);
         this.row = (int) (this.BIGY/gp.currentSize);
+        this.attack = 0;
+        this.defense = 0;
+        this.currentArmor = null;
+        this.currentWeapon = new WoodSword(this.gp);
+        this.experience = 0;
+        this.level = 1;
+        this.money = 0;
+        this.doAttack = this.playerMove.doAttack;
+
     }
 
     public void update(){
@@ -74,6 +90,15 @@ public class Player extends gameObject implements PlayerObserver {
     @Override
     public void updatePlayerHP(int currentHP) {
         this.HP = currentHP;
+        if(this.HP<=0){
+            this.gp.gameState = this.gp.deathState;
+        }
+    }
+
+    @Override
+    public void updateAttackStatus(boolean doAttack) {
+        this.doAttack = doAttack;
+       // System.out.println(this.doAttack);
     }
 
     public void setName(String name){
@@ -124,6 +149,47 @@ public class Player extends gameObject implements PlayerObserver {
 
     @Override
     public void OutOfCombatMovement() {
+
+    }
+
+    public int getHP() {
+        return this.HP;
+    }
+
+    public int getAttack() {
+        return this.attack;
+    }
+
+    public int getDefense() {
+        return this.defense;
+    }
+
+    public int getExperience() {
+        return this.experience;
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    public gameObject getCurrentWeapon() {
+        return this.currentWeapon;
+    }
+
+    public gameObject getCurrentArmor() {
+        return this.currentArmor;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public boolean isDoAttack() {
+        return this.doAttack;
+    }
+
+    @Override
+    public void getHurt(int attack) {
 
     }
 }

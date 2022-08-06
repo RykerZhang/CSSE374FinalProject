@@ -39,7 +39,8 @@ public class PlayerMove implements PlayerSubject {
     public int defaultCollideX = 0;
     public int defaultCollideY = 0;
     public int HP;
-
+    public Rectangle playerAttackBox;
+    public boolean doAttack;
 
     gameObject go;
 
@@ -55,6 +56,7 @@ public class PlayerMove implements PlayerSubject {
         this.speed = 4;
         this.kc = kc;
         this.collideArea = new Rectangle(2,2, 26, 26);
+        this.playerAttackBox = new Rectangle(10,10,30,30);
         this.go = go;
         this.player = player;
         this.HP = 100;
@@ -63,6 +65,7 @@ public class PlayerMove implements PlayerSubject {
     public void updatePlayerPosition(){
         this.checkCollision();
         this.switchSameDirectionImage();
+
         if(kc.isPressRight){
             this.direction = "right";
             this.doUpObjectCollide = false;
@@ -133,6 +136,11 @@ public class PlayerMove implements PlayerSubject {
                 }
             }
         }
+        if(kc.isAttack){
+            this.doAttack = true;
+        }else{
+            this.doAttack = false;
+        }
 
         this.notifyObservers();
     }
@@ -145,6 +153,8 @@ public class PlayerMove implements PlayerSubject {
         }
 
     }
+
+
     public void setCollideArea(Rectangle collideArea) {
         this.collideArea = collideArea;
     }
@@ -219,6 +229,7 @@ public class PlayerMove implements PlayerSubject {
         for (PlayerObserver o: playerObservers){
             o.updatePlayerPosition((int)this.BIGX, (int)this.BIGY, this.PlayerImage,(int) this.x, (int)this.y);
             o.updatePlayerHP(this.HP);
+            o.updateAttackStatus(this.doAttack);
         }
     }
 

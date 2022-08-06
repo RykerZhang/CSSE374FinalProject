@@ -1,11 +1,8 @@
 package Main;
 
 import Background.backgroundHandler;
+import gameObjects.*;
 import gameObjects.InteractableObjects.Placement;
-import gameObjects.gameObject;
-import gameObjects.gameObjectFactory;
-import gameObjects.PlayerFactory;
-import gameObjects.gameObjectSetter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,8 +21,8 @@ public class gamePanel extends JPanel implements Runnable{
     public double BIGWIDTH = currentSize*BIGCOL;
     public double BIGHEIGHT = currentSize*BIGROW;
     //player
-    public gameObjectFactory PlayerFactory1 = new PlayerFactory(kc, this);
-    public gameObject player1 =PlayerFactory1.createObject();
+    public PlayerFactory PlayerFactory1 = new PlayerFactory(kc, this);
+    public Player player1 =PlayerFactory1.createPlayer();
     public backgroundHandler bgHandler = new backgroundHandler(this);
     //collisionchecker
     public collideChecker cc = new collideChecker(this);
@@ -42,8 +39,8 @@ public class gamePanel extends JPanel implements Runnable{
     public int playingState = 0;
     public int dialogueState = 1;
     public int startState = 2;
-
-
+    public int propertyState = 3;
+    public int deathState = 4;
     public gamePanel(){
         super();
         this.setPreferredSize(new Dimension((int)screenWidth, (int)screenHeight));

@@ -67,6 +67,16 @@ public class NPC_initialHelper extends gameObject{
 
     }
 
+    @Override
+    public boolean isDoAttack() {
+        return false;
+    }
+
+    @Override
+    public void getHurt(int attack) {
+
+    }
+
 //    public void setNPC(Graphics2D g2d){
 //        BIGX = this.col*gp.currentSize;
 //        BIGY = this.row* gp.currentSize;
