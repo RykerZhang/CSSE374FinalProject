@@ -70,8 +70,6 @@ public class keyControl implements KeyListener{
         }else if(gp.gameState == gp.propertyState && input == KeyEvent.VK_P){
             gp.gameState = gp.playingState;
         }
-
-
     }
 
     @Override

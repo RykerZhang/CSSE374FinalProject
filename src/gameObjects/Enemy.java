@@ -171,8 +171,8 @@ public class Enemy extends gameObject{
 
     public void getHurt(int Attack){
         this.HP -= Attack;
-
     }
+
     public void checkCollision(){
         this.gp.cc.checkUpCollisionForObject(this);
         this.gp.cc.checkLeftCollisionForObject(this);

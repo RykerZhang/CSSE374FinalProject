@@ -204,12 +204,6 @@ public class PlayerMove implements PlayerSubject {
         return this.imageChoose;
     }
 
-
-
-
-
-
-
     public BufferedImage getDefaultImage(){
         return playerFront1;
     }

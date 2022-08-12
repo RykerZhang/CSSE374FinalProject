@@ -34,6 +34,15 @@ public class Chest extends gameObject {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void draw(Graphics2D g2d) {
+        double screenx = this.BIGX - gp.player1.getBIGX()+gp.player1.getX();
+        double screeny = this.BIGY - gp.player1.getBIGY()+gp.player1.getY();
+        g2d.drawImage(this.image, (int)screenx, (int)screeny, gp.currentSize, gp.currentSize, null);
+    }
+
+
     @Override
     public void update() {
 
@@ -69,12 +78,6 @@ public class Chest extends gameObject {
         return this.row;
     }
 
-    @Override
-    public void draw(Graphics2D g2d) {
-        double screenx = this.BIGX - gp.player1.getBIGX()+gp.player1.getX();
-        double screeny = this.BIGY - gp.player1.getBIGY()+gp.player1.getY();
-        g2d.drawImage(this.image, (int)screenx, (int)screeny, gp.currentSize, gp.currentSize, null);
-    }
 
     @Override
     public String getName() {

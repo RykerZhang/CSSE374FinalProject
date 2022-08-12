@@ -391,7 +391,6 @@ public class collideChecker {
         int goRCol1 = goRBigX1/this.gp.currentSize;
         int goURow1 = goUBigY1/this.gp.currentSize;
         int goDRow1 = goDBigY1/this.gp.currentSize;
-
         int goLBigX2 = (int) (go2.getBIGX()+go2.collideArea.x);
         int goRBigX2 = (int) (go2.getBIGX()+go2.collideArea.x+go2.collideArea.width);
         int goUBigY2 = (int) (go2.getBIGY()+go2.collideArea.y);
@@ -431,8 +430,6 @@ public class collideChecker {
 
             }
         }
-
-
         if((goRCol1 == goLCol2 || goLCol1 == goRCol2)&&(goDRow1 == goURow2 || goURow1 == goDRow2)){
             if(goRCol1 == goLCol2){
                 if(go1.getDirection() == "right"){
@@ -441,7 +438,6 @@ public class collideChecker {
                     go1.setDoRightObjectCollide(false);
                 }
             }
-
             if(goLCol1 == goRCol2){
                 if(go1.getDirection() == "left"){
                     go1.setDoLeftObjectCollide(true);
@@ -449,7 +445,6 @@ public class collideChecker {
                     go1.setDoLeftObjectCollide(false);
                 }
             }
-
             if(goDRow1 == goURow2){
                 if(go1.getDirection() == "down"){
                     go1.setDoDownObjectCollide(true);
@@ -457,7 +452,6 @@ public class collideChecker {
                     go1.setDoDownObjectCollide(false);
                 }
             }
-
             if(goURow1 == goDRow2) {
                 if (go1.getDirection() == "up") {
                     go1.setDoUpObjectCollide(true);
