@@ -75,6 +75,29 @@ public class gameUI {
         if(gp.gameState == gp.deathState){
             showEnd(g2d);
         }
+        if(gp.gameState == gp.winState){
+            showWin(g2d);
+            //System.out.println("WinWINWIN");
+        }
+    }
+
+    public void showWin(Graphics2D g2d){
+        int x = gp.currentSize*3;
+        int y = gp.currentSize*2;
+        int width = gp.currentSize*20;
+        int height = gp.currentSize*10;
+        this.drawWindowInside(g2d, x, y, width, height);
+        x+=160;
+        y+=60;
+        g2d.setColor(Color.yellow);
+        Font propertyFont = new Font("Arial", Font.BOLD, 54);
+        g2d.setFont(propertyFont);
+        g2d.drawString("You WIN ", x, y);
+        Font propertyFont2 = new Font("Arial", Font.BOLD, 24);
+        g2d.setFont(propertyFont2);
+        y+=50;
+        x+=20;
+        //g2d.drawString("Press Enter to Exit", x, y);
     }
 
     public void showEnd(Graphics2D g2d){
@@ -107,6 +130,10 @@ public class gameUI {
         y+=lineInterval;
         Font propertyFont = new Font("Arial", Font.BOLD, 14);
         g2d.setFont(propertyFont);
+        g2d.drawString("Enemy Killed: ", x, y);
+        String enemyKilled = String.valueOf(this.gp.player1.getEnemyKilled());
+        g2d.drawString(enemyKilled, x+this.getStringDisplayedLength("Enemy Killed ", g2d)+5,y );
+        y+=lineInterval;
         g2d.drawString("Level: ", x, y);
         String level = String.valueOf(this.gp.player1.getLevel());
         g2d.drawString(level, x+this.getStringDisplayedLength("Level ", g2d)+5,y );
@@ -180,7 +207,7 @@ public class gameUI {
         }else{
             this.gp.gameState = this.gp.playingState;
             this.sentanceNumber = 0;
-            System.out.println(this.gp.gameState);
+            //System.out.println(this.gp.gameState);
             g2d.clearRect(0,0,0,0);
         }
     }

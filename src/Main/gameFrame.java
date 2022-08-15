@@ -10,7 +10,7 @@ public class gameFrame extends JFrame {
         this.setLayout(new FlowLayout());
         this.setResizable(false);
         this.setTitle(title);
-        gamePanel theGamePanel = new gamePanel();
+        gamePanel theGamePanel = gamePanel.getInstance();
         this.add(theGamePanel);
         this.pack();
         this.setLocationRelativeTo(null);

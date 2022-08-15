@@ -36,7 +36,8 @@ public class Player extends gameObject implements PlayerObserver {
     public gameObject currentArmor;
     public int money;
     public boolean doAttack;
-
+    public int keyNumber;
+    public int enemyKilled = 0;
 
 
     public Player(keyControl kc, gamePanel gp){
@@ -51,6 +52,7 @@ public class Player extends gameObject implements PlayerObserver {
         this.row = (int) (this.BIGY/gp.currentSize);
         this.attack = 0;
         this.defense = 0;
+        this.keyNumber = 0;
         this.currentArmor = null;
         this.currentWeapon = new WoodSword(this.gp);
         this.experience = 0;
@@ -85,6 +87,9 @@ public class Player extends gameObject implements PlayerObserver {
         this.PlayerImgae = PlayerImage;
         this.col = (int) (this.BIGX/gp.currentSize);
         this.row = (int) (this.BIGY/gp.currentSize);
+        if(this.getCol() == 55 && this.getRow() == 38 && this.enemyKilled == 5){
+            this.gp.gameState = this.gp.winState;
+        }
     }
 
     @Override
@@ -191,5 +196,21 @@ public class Player extends gameObject implements PlayerObserver {
     @Override
     public void getHurt(int attack) {
 
+    }
+
+    public int getKeyNumber() {
+        return keyNumber;
+    }
+
+    public void setKeyNumber(int keyNumber) {
+        this.keyNumber = keyNumber;
+    }
+
+    public int getEnemyKilled() {
+        return enemyKilled;
+    }
+
+    public void setEnemyKilled(int enemyKilled) {
+        this.enemyKilled = enemyKilled;
     }
 }

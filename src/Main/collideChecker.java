@@ -406,27 +406,27 @@ public class collideChecker {
 
         //check attack hitbox
          if(go1.isDoAttack() == true) {
-            System.out.println("I attack!");
+            //System.out.println("I attack!");
             if (goRAttackX11 > goRBigX2 && goRBigX2 > goRBigX1) {
                 go2.getHurt(12);
-                System.out.println("Enemy is hit R");
+                //System.out.println("Enemy is hit R");
             }
             else if (goLAttackX11 < goLBigX2 && goLBigX2 < goLBigX1) {
                 go2.getHurt(12);
 
-                System.out.println("Enemy is hit L");
+                //System.out.println("Enemy is hit L");
 
             }
             else if(goUAttackY11<goDBigY2 && goDBigY2> goUBigY1){
                 go2.getHurt(12);
 
-                System.out.println("Enemy is hit U");
+                //System.out.println("Enemy is hit U");
 
             }
             else if(goDAttackY11>goDBigY2&& goDBigY1<goDBigY2){
                 go2.getHurt(12);
 
-                System.out.println("Enemy is hit D");
+                //System.out.println("Enemy is hit D");
 
             }
         }

@@ -12,6 +12,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class PlayerMove implements PlayerSubject {
+    private moveUp up = new moveUp();
+    private moveLeft left = new moveLeft();
+    private moveRight right = new moveRight();
+    private moveDown down = new moveDown();
     private double x;
     private double y;
     private double BIGX;
@@ -76,8 +80,8 @@ public class PlayerMove implements PlayerSubject {
             }else{
                 this.PlayerImage = playerRight2;
             }
-            if(this.doRightCollide == false && this.doRightObjectCollide == false) {
-                BIGX += speed;
+            if(this.doRightCollide == false && this.doRightObjectCollide == false && this.gp.gameState == this.gp.playingState) {
+                right.execute();
             }else{
             }
         }
@@ -91,8 +95,8 @@ public class PlayerMove implements PlayerSubject {
             }else{
                 this.PlayerImage = playerBack2;
             }
-            if(this.doUpCollide == false && this.doUpObjectCollide == false) {
-                BIGY -= speed;
+            if(this.doUpCollide == false && this.doUpObjectCollide == false && this.gp.gameState == this.gp.playingState) {
+                up.execute();
             }else{
             }
         }
@@ -106,8 +110,8 @@ public class PlayerMove implements PlayerSubject {
             }else{
                 this.PlayerImage = playerFront2;
             }
-            if(this.doDownCollide == false && this.doDownObjectCollide == false) {
-                BIGY += speed;
+            if(this.doDownCollide == false && this.doDownObjectCollide == false && this.gp.gameState == this.gp.playingState) {
+                down.execute();
             }else{
             }
         }
@@ -121,12 +125,12 @@ public class PlayerMove implements PlayerSubject {
             }else{
                 this.PlayerImage = playerLeft2;
             }
-            if(this.doLeftCollide == false && this.doLeftObjectCollide == false) {
-                BIGX -= speed;
+            if(this.doLeftCollide == false && this.doLeftObjectCollide == false && this.gp.gameState == this.gp.playingState) {
+                left.execute();
             }else{
             }
         }
-        if(kc.isPressInteract){
+        if(kc.isPressInteract && this.gp.gameState == this.gp.playingState){
             if(this.collideObject!=null){
                 //System.out.println(this.collideObject.isInteractable());
 
@@ -136,10 +140,14 @@ public class PlayerMove implements PlayerSubject {
                 }
             }
         }
-        if(kc.isAttack){
+        if(kc.isAttack && this.gp.gameState == this.gp.playingState){
             this.doAttack = true;
         }else{
             this.doAttack = false;
+        }
+        if(this.gp.gameState == this.gp.winState && kc.isPressInteract){
+            System.out.println("sould exit");
+            System.exit(0);
         }
 
         this.notifyObservers();
@@ -321,5 +329,30 @@ public class PlayerMove implements PlayerSubject {
 
     public void setDoDownObjectCollide(boolean doDownObjectCollide) {
         this.doDownObjectCollide = doDownObjectCollide;
+    }
+
+    public class moveUp implements Command{
+        @Override
+        public void execute() {
+            BIGY -= speed;
+        }
+    }
+    public class moveDown implements Command{
+        @Override
+        public void execute() {
+            BIGY += speed;
+        }
+    }
+    public class moveRight implements Command{
+        @Override
+        public void execute() {
+            BIGX += speed;
+        }
+    }
+    public class moveLeft implements Command{
+        @Override
+        public void execute() {
+            BIGX -= speed;
+        }
     }
 }

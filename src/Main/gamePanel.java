@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class gamePanel extends JPanel implements Runnable{
+    private static gamePanel uniquePanel;
     public int currentSize = 30;
     public double screenColumn = 24;
     public int screenRow = 16;
@@ -41,7 +42,8 @@ public class gamePanel extends JPanel implements Runnable{
     public int startState = 2;
     public int propertyState = 3;
     public int deathState = 4;
-    public gamePanel(){
+    public int winState = 5;
+    private gamePanel(){
         super();
         this.setPreferredSize(new Dimension((int)screenWidth, (int)screenHeight));
         this.setBackground(Color.black);
@@ -49,6 +51,13 @@ public class gamePanel extends JPanel implements Runnable{
         this.addKeyListener(kc);
         this.setFocusable(true);
         this.gameState = startState;
+    }
+
+    public static synchronized gamePanel getInstance(){
+        if(uniquePanel == null) {
+            uniquePanel = new gamePanel();
+        }
+            return uniquePanel;
     }
 
     public void startThread(){
@@ -96,7 +105,6 @@ public class gamePanel extends JPanel implements Runnable{
             placement.placeObjects(g2d);
         }
         UI.draw(g2d);
-
 
         g2d.dispose();
     }
